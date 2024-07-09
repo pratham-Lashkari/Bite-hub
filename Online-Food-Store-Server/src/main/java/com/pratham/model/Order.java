@@ -10,5 +10,5 @@ import lombok.Data;
 public class Order {
 
   @Id
-  private String Id;
+  private String id;
 }

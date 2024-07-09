@@ -16,15 +16,15 @@ import lombok.Data;
 public class User {
 
   @Id
-  private String Id;
+  private String id;
   private String fullName;
   private String email;
   private String password;
   private USER_ROLE role;
 
-  private List<Order> orders = new ArrayList<>();
+  private List<String> orders = new ArrayList<>();
 
   private List<RestaurantDto> favourites = new ArrayList<>();
 
-  private List<Address> addresses = new ArrayList<>();
+  private List<String> addresses = new ArrayList<>();
 }

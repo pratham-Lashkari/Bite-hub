@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class RestaurantDto {
 
-  private String Id;
+  private String id;
   private String title;
   private List<String> description;
 }
