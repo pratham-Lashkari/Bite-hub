@@ -1,5 +1,7 @@
 package com.pratham.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -20,4 +22,8 @@ public class Food {
   private List<String> images;
   private boolean available;
   private Restaurant restaurant;
+  private boolean isSeasonal;
+  private boolean isVegetarian;
+  private List<String> ingredients = new ArrayList<>();
+  private Date createdAt;
 }
