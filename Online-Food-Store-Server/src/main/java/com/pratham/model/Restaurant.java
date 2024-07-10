@@ -1,5 +1,6 @@
 package com.pratham.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,4 +25,8 @@ public class Restaurant {
   private ContactInformation contactInformation;
   private String openingHours;
   private List<String> orders = new ArrayList<>();
+  private List<String> images;
+  private boolean open;
+  private LocalDateTime registrationDate;
+  private List<String> foods = new ArrayList<>();
 }
