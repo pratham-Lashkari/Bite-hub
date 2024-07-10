@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "IngredientCategory")
-
-public class IngredientCategory {
+@Document(collection = "User")
+public class Cart {
 
   @Id
   private String id;
-  private String name;
-  private String restaurantId;
-  private List<String> ingredientsItem = new ArrayList<>();
+  private String cusotmerId;
+  private Long total;
+  private List<CartItem> cartItems = new ArrayList<>();
+
 }
