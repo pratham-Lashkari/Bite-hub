@@ -9,9 +9,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.pratham.Dto.RestaurantDto;
 import com.pratham.enums.USER_ROLE;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "User")
 public class User {
 
