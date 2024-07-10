@@ -1,5 +1,8 @@
 package com.pratham.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
@@ -19,4 +22,6 @@ public class Restaurant {
   private String description;
   private Address address;
   private ContactInformation contactInformation;
+  private String openingHours;
+  private List<String> orders = new ArrayList<>();
 }
