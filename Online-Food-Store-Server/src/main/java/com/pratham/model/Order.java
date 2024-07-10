@@ -1,6 +1,8 @@
 package com.pratham.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,5 +20,9 @@ public class Order {
   private String totalAmount;
   private String orderStatus;
   private Date createdAt;
-  private String deliveryAddress;
+  private String deliveryAddressId;
+  private List<OrderItem> orderItems = new ArrayList<>();
+  // private Payment payment;
+  private int totalItem;
+  private int totalPrice;
 }
