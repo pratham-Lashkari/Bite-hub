@@ -68,4 +68,8 @@ public class AtuhController {
     return new ResponseEntity<>(authResponse, HttpStatus.CREATED);
   }
 
+  public ResponseEntity<AuthResponse> login() throws Exception {
+
+  }
+
 }
