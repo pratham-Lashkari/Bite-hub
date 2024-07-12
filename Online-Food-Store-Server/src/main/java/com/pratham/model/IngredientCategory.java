@@ -14,7 +14,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "IngredientCategory")
-
 public class IngredientCategory {
 
   @Id

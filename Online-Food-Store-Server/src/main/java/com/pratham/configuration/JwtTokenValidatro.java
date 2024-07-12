@@ -24,20 +24,15 @@ public class JwtTokenValidatro extends OncePerRequestFilter {
   protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     String token = request.getHeader(JwtConstant.JWT_HEADER);
-
-    if (token != null) {
-      token = token.substring(7);
+    if (token != null && token.startsWith("Bearer ")) {
+      token = token.substring(7).trim();
       try {
-
         Claims claims = Jwts.parserBuilder().setSigningKey(JwtConstant.key).build().parseClaimsJws(token).getBody();
-
         String email = String.valueOf(claims.get("email"));
         String authorities = String.valueOf(claims.get("authorities"));
-
         List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
         Authentication authentication = new UsernamePasswordAuthenticationToken(email, null, auth);
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
       } catch (Exception e) {
         throw new BadCredentialsException("Invalid token");
       }

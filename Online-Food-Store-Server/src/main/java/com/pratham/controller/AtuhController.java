@@ -75,7 +75,7 @@ public class AtuhController {
   }
 
   @PostMapping("/login")
-  public ResponseEntity<AuthResponse> login(LoginRequest req) throws Exception {
+  public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest req) throws Exception {
 
     String email = req.getEmail();
     String password = req.getPassword();
@@ -99,7 +99,7 @@ public class AtuhController {
     if (userDetails == null) {
       throw new Exception("Inavlid User email");
     }
-    if (passwordEncoder.matches(password, userDetails.getPassword())) {
+    if (!passwordEncoder.matches(password, userDetails.getPassword())) {
       throw new Exception("Inavlid User password");
     }
     return new UsernamePasswordAuthenticationToken(email, null, userDetails.getAuthorities());
