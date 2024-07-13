@@ -14,8 +14,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
-
-import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -37,20 +36,19 @@ public class AppConfig {
     return http.build();
   }
 
-  private CorsConfigurationSource corsConfigurationSource() {
-    return new CorsConfigurationSource() {
+  @Bean
+  public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedHeaders(Collections.singletonList("*"));
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
+    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+    configuration.addExposedHeader("Authorization");
+    configuration.setMaxAge(3600L);
+    configuration.setAllowCredentials(true);
 
-      @Override
-      public CorsConfiguration getCorsConfiguration(HttpServletRequest arg0) {
-        CorsConfiguration cfg = new CorsConfiguration();
-        cfg.setAllowedOrigins(Arrays.asList(""));
-        cfg.setAllowCredentials(true);
-        cfg.setAllowedHeaders(Collections.singletonList("*"));
-        cfg.setExposedHeaders(Arrays.asList(("Authorization")));
-        cfg.setMaxAge(3600L);
-        return cfg;
-      }
-    };
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 
   @Bean
