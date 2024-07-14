@@ -20,13 +20,16 @@ public class SecurityFilter {
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     http.csrf(csrf -> csrf.disable());
-    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     http.authorizeHttpRequests(request -> request
-        .requestMatchers("/api/auth/**").permitAll()
-        .anyRequest().authenticated());
+        .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER", "ADMIN")
+        .requestMatchers("/api/**").authenticated()
+        .anyRequest().permitAll());
     http.addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class);
+    http.csrf(csrf -> csrf.disable());
     http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+
     return http.build();
   }
 
