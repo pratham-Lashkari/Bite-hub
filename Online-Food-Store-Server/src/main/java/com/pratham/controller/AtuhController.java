@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pratham.configuration.JwtProvider;
+import com.pratham.config.JwtProvider;
 import com.pratham.enums.USER_ROLE;
 import com.pratham.model.Cart;
 import com.pratham.model.User;

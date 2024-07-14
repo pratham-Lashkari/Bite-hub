@@ -1,4 +1,4 @@
-package com.pratham.configuration;
+package com.pratham.config;
 
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.security.Keys;

@@ -1,4 +1,4 @@
-package com.pratham.configuration;
+package com.pratham.config;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -6,7 +6,6 @@ import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,22 +16,17 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
-@EnableWebSecurity
-public class AppConfig {
+public class SecurityFilter {
 
   @Bean
-  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-    http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-    http.authorizeHttpRequests(request -> request
-        .requestMatchers("/api/admin/**").hasAnyRole("RESTAURANT_OWNER", "ADMIN")
-        .requestMatchers("/api/**").authenticated()
-        .anyRequest().permitAll());
-    http.addFilterBefore(new JwtTokenValidatro(), BasicAuthenticationFilter.class);
+  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.csrf(csrf -> csrf.disable());
+    http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    http.authorizeHttpRequests(request -> request
+        .requestMatchers("/api/auth/**").permitAll()
+        .anyRequest().authenticated());
+    http.addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class);
     http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
-
     return http.build();
   }
 
@@ -52,7 +46,7 @@ public class AppConfig {
   }
 
   @Bean
-  PasswordEncoder passwordEncoder() {
+  public PasswordEncoder passwordEncoder() {
     return new BCryptPasswordEncoder();
   }
 
