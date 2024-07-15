@@ -28,9 +28,6 @@ public class RestaurantServiceImpl implements RestaurantService {
   private AddressRepository addressRepository;
 
   @Autowired
-  private UserService userService;
-
-  @Autowired
   private UserRepository userRepository;
 
   @Override
@@ -123,7 +120,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public Restaurant updateRestaurant(String id) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'updateRestaurant'");
+    Restaurant restaurant = findRestaurantById(id);
+    restaurant.setOpen(!restaurant.isOpen());
+    return restaurantRepository.save(restaurant);
   }
 
 }
