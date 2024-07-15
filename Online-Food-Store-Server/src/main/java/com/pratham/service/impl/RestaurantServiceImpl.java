@@ -2,6 +2,7 @@ package com.pratham.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.pratham.model.Restaurant;
 import com.pratham.model.User;
 import com.pratham.repository.AddressRepository;
 import com.pratham.repository.RestaurantRepository;
+import com.pratham.repository.UserRepository;
 import com.pratham.request.CreateRestaurantRequest;
 import com.pratham.service.RestaurantService;
 import com.pratham.service.UserService;
@@ -27,6 +29,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private UserRepository userRepository;
 
   @Override
   public Restaurant createRestaurant(CreateRestaurantRequest req, User user) {
@@ -72,27 +77,48 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public List<Restaurant> getAllRestaurant() {
-    throw new UnsupportedOperationException("Unimplemented method 'getAllRestaurant'");
+    return restaurantRepository.findAll();
   }
 
   @Override
-  public List<Restaurant> searchRestaurant() {
-    throw new UnsupportedOperationException("Unimplemented method 'searchRestaurant'");
+  public List<Restaurant> searchRestaurant(String query) {
+    return restaurantRepository.findBySearchQuery(query);
   }
 
   @Override
-  public Restaurant findRestaurantById(String restaurantId) {
-    throw new UnsupportedOperationException("Unimplemented method 'findRestaurantById'");
+  public Restaurant findRestaurantById(String restaurantId) throws Exception {
+    Optional<Restaurant> opt = restaurantRepository.findById(restaurantId);
+    if (opt.isEmpty()) {
+      throw new Exception("Restaurant not found");
+    }
+    return opt.get();
   }
 
   @Override
   public Restaurant getRestaurantByUserId(String userId) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'getRestaurantByUserId'");
+    Restaurant restaurant = restaurantRepository.findByOwnerId(userId);
+    if (restaurant == null) {
+      throw new Exception("Restauant not found ");
+    }
+    return restaurant;
   }
 
   @Override
   public RestaurantDto addToFavourites(String restaurantId, User user) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'addToFavourites'");
+    Restaurant restaurant = findRestaurantById(restaurantId);
+    RestaurantDto dto = new RestaurantDto();
+    dto.setDescription(restaurant.getDescription());
+    dto.setImages(restaurant.getImages());
+    dto.setTitle(restaurant.getName());
+    dto.setId(restaurant.getId());
+
+    if (user.getFavourites().contains(dto)) {
+      user.getFavourites().remove(dto);
+    } else {
+      user.getFavourites().add(dto);
+    }
+    userRepository.save(user);
+    return dto;
   }
 
   @Override

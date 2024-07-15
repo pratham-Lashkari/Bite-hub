@@ -9,5 +9,6 @@ public class RestaurantDto {
 
   private String id;
   private String title;
-  private List<String> description;
+  private String description;
+  private List<String> images;
 }
