@@ -1,21 +1,50 @@
 package com.pratham.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pratham.Dto.RestaurantDto;
+import com.pratham.model.Address;
 import com.pratham.model.Restaurant;
 import com.pratham.model.User;
+import com.pratham.repository.AddressRepository;
+import com.pratham.repository.RestaurantRepository;
 import com.pratham.request.CreateRestaurantRequest;
 import com.pratham.service.RestaurantService;
+import com.pratham.service.UserService;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
 
+  @Autowired
+  private RestaurantRepository restaurantRepository;
+
+  @Autowired
+  private AddressRepository addressRepository;
+
+  @Autowired
+  private UserService userService;
+
   @Override
   public Restaurant createRestaurant(CreateRestaurantRequest req, User user) {
-    throw new UnsupportedOperationException("Unimplemented method 'createRestaurant'");
+
+    Address address = addressRepository.save(req.getAddress());
+
+    Restaurant restaurant = new Restaurant();
+    restaurant.setAddress(address);
+    restaurant.setContactInformation(req.getContactInformation());
+    restaurant.setCuisineType(req.getCuisineType());
+    restaurant.setDescription(req.getDescription());
+    restaurant.setImages(req.getImages());
+    restaurant.setName(req.getName());
+    restaurant.setOpeningHours(req.getOpningHours());
+    restaurant.setRegistrationDate(LocalDateTime.now());
+    restaurant.setOwnerId(user.getId());
+
+    return restaurantRepository.save(restaurant);
   }
 
   @Override
