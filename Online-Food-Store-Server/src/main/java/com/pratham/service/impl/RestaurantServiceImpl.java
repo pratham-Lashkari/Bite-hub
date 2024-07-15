@@ -16,7 +16,6 @@ import com.pratham.repository.RestaurantRepository;
 import com.pratham.repository.UserRepository;
 import com.pratham.request.CreateRestaurantRequest;
 import com.pratham.service.RestaurantService;
-import com.pratham.service.UserService;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
