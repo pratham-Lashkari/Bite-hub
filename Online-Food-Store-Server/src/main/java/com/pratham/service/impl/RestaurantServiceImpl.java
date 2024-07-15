@@ -49,7 +49,19 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public Restaurant updateRestaurant(String restaurantId, CreateRestaurantRequest updateRestaurant) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'updateRestaurant'");
+
+    Restaurant restaurant = findRestaurantById(restaurantId);
+
+    if (updateRestaurant.getCuisineType() != null) {
+      restaurant.setCuisineType(updateRestaurant.getCuisineType());
+    }
+    if (updateRestaurant.getDescription() != null) {
+      restaurant.setDescription(updateRestaurant.getDescription());
+    }
+    if (updateRestaurant.getName() != null) {
+      restaurant.setName(updateRestaurant.getName());
+    }
+    return restaurantRepository.save(restaurant);
   }
 
   @Override
