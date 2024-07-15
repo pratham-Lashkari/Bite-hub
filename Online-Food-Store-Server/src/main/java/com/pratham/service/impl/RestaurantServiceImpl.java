@@ -66,7 +66,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public void deleteRestaurant(String restaurantId) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'deleteRestaurant'");
+    Restaurant restaurant = findRestaurantById(restaurantId);
+    restaurantRepository.delete(restaurant);
   }
 
   @Override
