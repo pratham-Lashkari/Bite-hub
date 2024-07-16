@@ -8,7 +8,6 @@ public class OnlineFoodStoreServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineFoodStoreServerApplication.class, args);
-
 		System.out.println("Server started");
 	}
 
