@@ -42,16 +42,21 @@ public class AdminRestaurantController {
   @PutMapping("/{id}")
   public ResponseEntity<Restaurant> updateRestaurant(@RequestBody CreateRestaurantRequest req, @PathVariable String id)
       throws Exception {
+
     Restaurant restaurant = restaurantService.updateRestaurant(id, req);
+
     return new ResponseEntity<>(restaurant, HttpStatus.OK);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<MessageResponse> deleteRestaurant(@PathVariable String id)
       throws Exception {
+
     restaurantService.deleteRestaurant(id);
     MessageResponse msg = new MessageResponse();
     msg.setMessage("Restaurant deleted successfully");
+
     return new ResponseEntity<>(msg, HttpStatus.OK);
   }
+
 }

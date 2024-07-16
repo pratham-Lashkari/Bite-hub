@@ -25,5 +25,5 @@ public interface RestaurantService {
 
   public RestaurantDto addToFavourites(String restaurantId, User user) throws Exception;
 
-  public Restaurant updateRestaurant(String id) throws Exception;
+  public Restaurant updateRestaurantStatus(String id) throws Exception;
 }

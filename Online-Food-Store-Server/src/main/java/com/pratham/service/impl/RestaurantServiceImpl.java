@@ -118,7 +118,7 @@ public class RestaurantServiceImpl implements RestaurantService {
   }
 
   @Override
-  public Restaurant updateRestaurant(String id) throws Exception {
+  public Restaurant updateRestaurantStatus(String id) throws Exception {
     Restaurant restaurant = findRestaurantById(id);
     restaurant.setOpen(!restaurant.isOpen());
     return restaurantRepository.save(restaurant);
