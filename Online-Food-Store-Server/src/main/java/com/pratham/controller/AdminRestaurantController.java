@@ -3,7 +3,9 @@ package com.pratham.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,5 +35,12 @@ public class AdminRestaurantController {
     Restaurant restaurant = restaurantService.createRestaurant(req, user);
 
     return new ResponseEntity<>(restaurant, HttpStatus.CREATED);
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Restaurant> updateRestaurant(@RequestBody CreateRestaurantRequest req, @PathVariable String id)
+      throws Exception {
+    Restaurant restaurant = restaurantService.updateRestaurant(id, req);
+    return new ResponseEntity<>(restaurant, HttpStatus.OK);
   }
 }
