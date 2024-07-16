@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -57,6 +58,21 @@ public class AdminRestaurantController {
     msg.setMessage("Restaurant deleted successfully");
 
     return new ResponseEntity<>(msg, HttpStatus.OK);
+  }
+
+  @PutMapping("/{id}/status")
+  public ResponseEntity<Restaurant> updateRestaurantStatus(@PathVariable String id)
+      throws Exception {
+    Restaurant restaurant = restaurantService.updateRestaurantStatus(id);
+    return new ResponseEntity<>(restaurant, HttpStatus.OK);
+  }
+
+  @GetMapping("/user")
+  public ResponseEntity<Restaurant> findRestaurantByUserId(@RequestHeader("Authorization") String jwt)
+      throws Exception {
+    User user = userService.findUserByJwtToken(jwt);
+    Restaurant restaurant = restaurantService.findRestaurantById(user.getId());
+    return new ResponseEntity<>(restaurant, HttpStatus.OK);
   }
 
 }
