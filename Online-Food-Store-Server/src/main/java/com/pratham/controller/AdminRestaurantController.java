@@ -3,6 +3,7 @@ package com.pratham.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pratham.model.Restaurant;
 import com.pratham.model.User;
 import com.pratham.request.CreateRestaurantRequest;
+import com.pratham.response.MessageResponse;
 import com.pratham.service.RestaurantService;
 import com.pratham.service.UserService;
 
@@ -42,5 +44,14 @@ public class AdminRestaurantController {
       throws Exception {
     Restaurant restaurant = restaurantService.updateRestaurant(id, req);
     return new ResponseEntity<>(restaurant, HttpStatus.OK);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<MessageResponse> deleteRestaurant(@PathVariable String id)
+      throws Exception {
+    restaurantService.deleteRestaurant(id);
+    MessageResponse msg = new MessageResponse();
+    msg.setMessage("Restaurant deleted successfully");
+    return new ResponseEntity<>(msg, HttpStatus.OK);
   }
 }
