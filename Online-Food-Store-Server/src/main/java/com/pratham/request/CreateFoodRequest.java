@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class CreateFoorRequest {
+public class CreateFoodRequest {
 
   private String name;
   private String description;
