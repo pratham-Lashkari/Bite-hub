@@ -107,7 +107,9 @@ public class FoodServiceImpl implements FoodService {
 
   @Override
   public Food updateAvailibilityStatus(String foodId) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'updateAvailibilityStatus'");
+    Food food = findFoodById(foodId);
+    food.setAvailable(!food.isAvailable());
+    return foodRepository.save(food);
   }
 
 }
