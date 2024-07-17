@@ -13,5 +13,12 @@ public interface FoodService {
 
   void deleteFood(String foodId) throws Exception;
 
-  public List<Food> getRestaurantFood(String restaurantId, boolean isVegitarain, boolean isSeasonal);
+  public List<Food> getRestaurantFood(String restaurantId, boolean isVegitarain, boolean isSeasonal,
+      String foodCategory, boolean isNonveg);
+
+  public List<Food> searchFood(String keyword);
+
+  public Food findFoodById(String foodId) throws Exception;
+
+  public Food updateAvailibilityStatus(String foodId) throws Exception;
 }
