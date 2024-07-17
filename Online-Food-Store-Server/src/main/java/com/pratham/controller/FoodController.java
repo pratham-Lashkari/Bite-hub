@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.pratham.model.Food;
 import com.pratham.service.FoodService;
-import com.pratham.service.RestaurantService;
 
 @RestController
 @RequestMapping("/api/food")
@@ -21,9 +20,6 @@ public class FoodController {
 
   @Autowired
   private FoodService foodService;
-
-  @Autowired
-  private RestaurantService restaurantService;
 
   @GetMapping("/search")
   public ResponseEntity<List<Food>> searchFood(@RequestParam String keyword) throws Exception {
