@@ -1,6 +1,7 @@
 package com.pratham.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,12 +93,16 @@ public class FoodServiceImpl implements FoodService {
 
   @Override
   public List<Food> searchFood(String keyword) {
-    throw new UnsupportedOperationException("Unimplemented method 'searchFood'");
+    return foodRepository.searchFood(keyword);
   }
 
   @Override
   public Food findFoodById(String foodId) throws Exception {
-    throw new UnsupportedOperationException("Unimplemented method 'findFoodById'");
+    Optional<Food> optionalFood = foodRepository.findById(foodId);
+    if (optionalFood.isEmpty()) {
+      throw new Exception("Food not exist...");
+    }
+    return optionalFood.get();
   }
 
   @Override
