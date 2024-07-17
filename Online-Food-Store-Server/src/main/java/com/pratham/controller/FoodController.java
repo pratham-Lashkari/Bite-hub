@@ -1,0 +1,46 @@
+package com.pratham.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pratham.model.Food;
+import com.pratham.service.FoodService;
+import com.pratham.service.RestaurantService;
+
+@RestController
+@RequestMapping("/api/food")
+public class FoodController {
+
+  @Autowired
+  private FoodService foodService;
+
+  @Autowired
+  private RestaurantService restaurantService;
+
+  @GetMapping("/search")
+  public ResponseEntity<List<Food>> searchFood(@RequestParam String keyword) throws Exception {
+
+    List<Food> foods = foodService.searchFood(keyword);
+    return new ResponseEntity<>(foods, HttpStatus.OK);
+  }
+
+  @GetMapping("/restaurant/{restaurantId}")
+  public ResponseEntity<List<Food>> getRestaurantFood(
+      @RequestParam boolean vegetarian,
+      @RequestParam boolean seasonal,
+      @RequestParam boolean nonveg,
+      @RequestParam(required = false) String food_category,
+      @PathVariable String restaurantId) throws Exception {
+
+    List<Food> foods = foodService.getRestaurantFood(restaurantId, vegetarian, seasonal, food_category, nonveg);
+    return new ResponseEntity<>(foods, HttpStatus.OK);
+  }
+}
