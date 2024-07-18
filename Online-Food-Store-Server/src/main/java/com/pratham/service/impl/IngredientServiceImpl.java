@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pratham.model.IngredientCategoryModel;
 import com.pratham.model.IngredientsItem;
 import com.pratham.repository.IngredientCategroyRepository;
 import com.pratham.repository.IngredientItemRepository;
 import com.pratham.service.IngredientCategory;
+import com.pratham.service.RestaurantService;
 
 @Service
 public class IngredientServiceImpl implements IngredientCategory {
@@ -19,20 +21,25 @@ public class IngredientServiceImpl implements IngredientCategory {
   @Autowired
   private IngredientItemRepository ingredientItemRepository;
 
+  @Autowired
+  private RestaurantService restaurantService;
+
   @Override
-  public IngredientCategory createIngredientCategory(String name, String restaurantId) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createIngredientCategory'");
+  public IngredientCategoryModel createIngredientCategory(String name, String restaurantId) throws Exception {
+    IngredientCategoryModel category = new IngredientCategoryModel();
+    category.setName(name);
+    category.setRestaurantId(restaurantId);
+    return ingredientCategroyRepository.save(category);
   }
 
   @Override
-  public IngredientCategory findIngredientCategoryById(String id) throws Exception {
+  public IngredientCategoryModel findIngredientCategoryById(String id) throws Exception {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'findIngredientCategoryById'");
   }
 
   @Override
-  public List<IngredientCategory> findIngredientCategoryByRestaurantId(String id) throws Exception {
+  public List<IngredientCategoryModel> findIngredientCategoryByRestaurantId(String id) throws Exception {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException("Unimplemented method 'findIngredientCategoryByRestaurantId'");
   }
