@@ -40,6 +40,6 @@ public class CategoryController {
       throws Exception {
     User user = userService.findUserByJwtToken(jwt);
     List<Category> createdCategorys = categorySerivce.findCategoryRestaurantId(user.getId());
-    return new ResponseEntity<>(createdCategorys, HttpStatus.CREATED);
+    return new ResponseEntity<>(createdCategorys, HttpStatus.OK);
   }
 }
