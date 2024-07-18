@@ -26,7 +26,7 @@ public class Food {
   private Category foodCategory;
   private List<String> images;
   private boolean available;
-  private String restaurant;
+  private String restaurantId;
   private boolean isSeasonal;
   private boolean isVegetarian;
   private List<String> ingredients = new ArrayList<>();

@@ -14,6 +14,6 @@ public interface FoodRepository extends MongoRepository<Food, String> {
 
   List<Food> findByRestaurantId(String restaurantId);
 
-  @Query("{ $or: [ { 'name': { $regex: :#{#keyword}, $options: 'i' } }, { 'foodcategory.name': { $regex: :#{#keyword}, $options: 'i' } } ] }")
+  @Query("{ $or: [ { 'name': { $regex: :#{#keyword}, $options: 'i' } }, { 'foodCategory.name': { $regex: :#{#keyword}, $options: 'i' } } ] }")
   List<Food> searchFood(@Param("keyword") String keyword);
 }

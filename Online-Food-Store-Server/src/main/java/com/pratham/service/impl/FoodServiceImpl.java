@@ -29,7 +29,7 @@ public class FoodServiceImpl implements FoodService {
 
     Food food = new Food();
     food.setFoodCategory(category);
-    food.setRestaurant(restaurant.getId());
+    food.setRestaurantId(restaurant.getId());
     food.setDescription(req.getDescription());
     food.setImages(req.getImages());
     food.setName(req.getName());
@@ -46,7 +46,7 @@ public class FoodServiceImpl implements FoodService {
   @Override
   public void deleteFood(String foodId) throws Exception {
     Food food = findFoodById(foodId);
-    food.setRestaurant("");
+    food.setRestaurantId("");
     foodRepository.save(food);
   }
 
