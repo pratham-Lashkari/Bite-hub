@@ -17,4 +17,6 @@ public interface IngredientCategory {
       throws Exception;
 
   public List<IngredientsItem> findRestaurantIngredientes(String restaurantId);
+
+  public IngredientsItem updateStock(String id) throws Exception;
 }

@@ -1,6 +1,7 @@
 package com.pratham.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,27 +35,36 @@ public class IngredientServiceImpl implements IngredientCategory {
 
   @Override
   public IngredientCategoryModel findIngredientCategoryById(String id) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findIngredientCategoryById'");
+    Optional<IngredientCategoryModel> opt = ingredientCategroyRepository.findById(id);
+    if (opt.isEmpty()) {
+      throw new Exception("ingredient not found");
+    }
+    return opt.get();
   }
 
   @Override
   public List<IngredientCategoryModel> findIngredientCategoryByRestaurantId(String id) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findIngredientCategoryByRestaurantId'");
+    restaurantService.findRestaurantById(id);
+    return ingredientCategroyRepository.findByRestaurantId(id);
   }
 
   @Override
   public IngredientsItem createIngredientItem(String restaurantId, String ingredientName, String categoryId)
       throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createIngredientItem'");
+    IngredientCategoryModel categoryModel = findIngredientCategoryById(categoryId);
+    return null;
   }
 
   @Override
   public List<IngredientsItem> findRestaurantIngredientes(String restaurantId) {
+    return null;
+
+  }
+
+  @Override
+  public IngredientsItem updateStock(String id) throws Exception {
     // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findRestaurantIngredientes'");
+    throw new UnsupportedOperationException("Unimplemented method 'updateStock'");
   }
 
 }
