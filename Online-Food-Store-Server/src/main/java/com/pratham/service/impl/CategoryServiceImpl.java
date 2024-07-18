@@ -1,6 +1,7 @@
 package com.pratham.service.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,14 +31,16 @@ public class CategoryServiceImpl implements CategorySerivce {
 
   @Override
   public List<Category> findCategoryRestaurantId(String id) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findCategoryRestaurantId'");
+    return categoryRepository.findByRestaurantId(id);
   }
 
   @Override
   public Category findCategoryById(String id) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findCategoryById'");
+    Optional<Category> optionalCategroy = categoryRepository.findById(id);
+    if (optionalCategroy.isEmpty()) {
+      throw new Exception("Category not found");
+    }
+    return optionalCategroy.get();
   }
 
 }
