@@ -6,7 +6,7 @@ import com.pratham.model.Category;
 
 public interface CategorySerivce {
 
-  public Category createcCategory(String name, String userId);
+  public Category createcCategory(String name, String userId) throws Exception;;
 
   public List<Category> findCategoryRestaurantId(String id) throws Exception;
 

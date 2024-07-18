@@ -2,18 +2,30 @@ package com.pratham.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pratham.model.Category;
+import com.pratham.model.Restaurant;
+import com.pratham.repository.CategoryRepository;
 import com.pratham.service.CategorySerivce;
+import com.pratham.service.RestaurantService;
 
 @Service
 public class CategoryServiceImpl implements CategorySerivce {
 
+  @Autowired
+  private RestaurantService restaurantService;
+  @Autowired
+  private CategoryRepository categoryRepository;
+
   @Override
-  public Category createcCategory(String name, String userId) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'createcCategory'");
+  public Category createcCategory(String name, String userId) throws Exception {
+    Restaurant restaurant = restaurantService.findRestaurantById(userId);
+    Category category = new Category();
+    category.setName(name);
+    category.setRestaurantId(restaurant.getId());
+    return categoryRepository.save(category);
   }
 
   @Override
