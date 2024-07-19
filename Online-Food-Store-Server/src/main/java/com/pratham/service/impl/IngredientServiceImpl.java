@@ -52,7 +52,15 @@ public class IngredientServiceImpl implements IngredientCategory {
   public IngredientsItem createIngredientItem(String restaurantId, String ingredientName, String categoryId)
       throws Exception {
     IngredientCategoryModel categoryModel = findIngredientCategoryById(categoryId);
-    return null;
+    IngredientsItem item = new IngredientsItem();
+    item.setName(ingredientName);
+    item.setRestaurant(restaurantId);
+    item.setIngredientCategoryId(categoryId);
+    IngredientsItem ingredientsItem = ingredientItemRepository.save(item);
+    categoryModel.getIngredientsItem().add(ingredientsItem.getId());
+    ingredientCategroyRepository.save(categoryModel);
+
+    return ingredientsItem;
   }
 
   @Override
