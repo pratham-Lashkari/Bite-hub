@@ -70,8 +70,14 @@ public class IngredientServiceImpl implements IngredientCategory {
 
   @Override
   public IngredientsItem updateStock(String id) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateStock'");
+    Optional<IngredientsItem> optionalIngredientsItem = ingredientItemRepository.findById(id);
+
+    if (optionalIngredientsItem.isEmpty()) {
+      throw new Exception("Ingrident not found");
+    }
+    IngredientsItem ingredientsItem = optionalIngredientsItem.get();
+    ingredientsItem.setInStoke(!ingredientsItem.isInStoke());
+    return ingredientItemRepository.save(ingredientsItem);
   }
 
 }
