@@ -65,8 +65,7 @@ public class IngredientServiceImpl implements IngredientCategory {
 
   @Override
   public List<IngredientsItem> findRestaurantIngredientes(String restaurantId) {
-    return null;
-
+    return ingredientItemRepository.findByRestaurantId(restaurantId);
   }
 
   @Override
