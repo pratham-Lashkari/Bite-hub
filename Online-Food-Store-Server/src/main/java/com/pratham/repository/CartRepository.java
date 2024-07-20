@@ -6,4 +6,6 @@ import com.pratham.model.Cart;
 
 public interface CartRepository extends MongoRepository<Cart, String> {
 
+  public Cart findByCustomerId(String userId);
+
 }
