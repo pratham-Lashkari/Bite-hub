@@ -1,5 +1,7 @@
 package com.pratham.service.impl;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +34,6 @@ public class CartServiceImlp implements CartService {
   @Override
   public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
     User user = userService.findUserByJwtToken(jwt);
-    Food food = foodService.findFoodById(req.getFoodId());
     Cart cart = cartRepository.findByCustomerId(user.getId());
 
     for (CartItem cartItem : cart.getCartItems()) {
@@ -50,11 +51,20 @@ public class CartServiceImlp implements CartService {
 
     CartItem savCartItem = cartItemRepository.save(newCartItem);
     cart.getCartItems().add(savCartItem);
+    cartRepository.save(cart);
     return savCartItem;
   }
 
   @Override
   public CartItem updateCartItemQuantity(String cartItemId, int quantity) throws Exception {
+    Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartItemId);
+    if (cartItemOptional.isEmpty()) {
+      throw new Exception("Cart item not found");
+    }
+    CartItem item = cartItemOptional.get();
+    item.setQuantity(quantity);
+    Food food = foodService.findFoodById(item.getFoodId());
+    item.setTotalPrice(food.getPrice() * quantity);
     return null;
   }
 
