@@ -56,4 +56,11 @@ public class IngredientController {
     return new ResponseEntity<>(items, HttpStatus.OK);
   }
 
+  @GetMapping("/restaurant/{id}/category")
+  public ResponseEntity<List<IngredientCategoryModel>> getRestaurantIngredientCategory(@PathVariable String id)
+      throws Exception {
+    List<IngredientCategoryModel> items = ingredientServiceImpl.findIngredientCategoryByRestaurantId(id);
+    return new ResponseEntity<>(items, HttpStatus.OK);
+  }
+
 }
