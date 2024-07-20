@@ -16,6 +16,6 @@ public class IngredientsItem {
   private String id;
   private String name;
   private String ingredientCategoryId;
-  private String restaurant;
+  private String restaurantId;
   private boolean inStoke = true;
 }

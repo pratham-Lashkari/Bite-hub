@@ -59,7 +59,7 @@ public class AtuhController {
     User savedUser = userRepository.save(createUser);
 
     Cart cart = new Cart();
-    cart.setCusotmerId(savedUser.getId());
+    cart.setCustomerId(savedUser.getId());
     cartRepository.save(cart);
 
     Authentication authentication = new UsernamePasswordAuthenticationToken(savedUser.getEmail(),

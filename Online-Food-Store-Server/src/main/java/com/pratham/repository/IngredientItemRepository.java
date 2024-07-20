@@ -10,5 +10,5 @@ import com.pratham.model.IngredientsItem;
 @Repository
 public interface IngredientItemRepository extends MongoRepository<IngredientsItem, String> {
 
-  List<IngredientsItem> findByRestaurantId(String id);
+  public List<IngredientsItem> findByRestaurantId(String id);
 }

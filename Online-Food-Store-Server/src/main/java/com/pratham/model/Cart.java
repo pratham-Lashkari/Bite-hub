@@ -18,7 +18,7 @@ public class Cart {
 
   @Id
   private String id;
-  private String cusotmerId;
+  private String customerId;
   private Long total;
   private List<CartItem> cartItems = new ArrayList<>();
 

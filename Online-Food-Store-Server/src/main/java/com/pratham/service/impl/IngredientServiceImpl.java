@@ -54,7 +54,7 @@ public class IngredientServiceImpl implements IngredientCategory {
     IngredientCategoryModel categoryModel = findIngredientCategoryById(categoryId);
     IngredientsItem item = new IngredientsItem();
     item.setName(ingredientName);
-    item.setRestaurant(restaurantId);
+    item.setRestaurantId(restaurantId);
     item.setIngredientCategoryId(categoryId);
     IngredientsItem ingredientsItem = ingredientItemRepository.save(item);
     categoryModel.getIngredientsItem().add(ingredientsItem.getId());
