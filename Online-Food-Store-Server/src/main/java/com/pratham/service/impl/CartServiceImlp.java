@@ -70,7 +70,15 @@ public class CartServiceImlp implements CartService {
 
   @Override
   public Cart removeItemFormCart(String cartItemId, String jwt) throws Exception {
-    return null;
+    User user = userService.findUserByJwtToken(jwt);
+    Cart cart = cartRepository.findByCustomerId(user.getId());
+    Optional<CartItem> cartItemOptional = cartItemRepository.findById(cartItemId);
+    if (cartItemOptional.isEmpty()) {
+      throw new Exception("Cart item not found");
+    }
+    CartItem item = cartItemOptional.get();
+    cart.getCartItems().remove(item);
+    return cartRepository.save(cart);\
   }
 
   @Override
