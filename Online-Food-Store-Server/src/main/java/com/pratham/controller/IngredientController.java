@@ -33,7 +33,7 @@ public class IngredientController {
     return new ResponseEntity<>(item, HttpStatus.CREATED);
   }
 
-  @PostMapping("/")
+  @PostMapping()
   public ResponseEntity<IngredientsItem> createIngredientItem(@RequestBody IngredientRequest req)
       throws Exception {
 
