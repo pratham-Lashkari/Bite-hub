@@ -35,10 +35,22 @@ public class CartServiceImlp implements CartService {
     Food food = foodService.findFoodById(req.getFoodId());
     Cart cart = cartRepository.findByCustomerId(user.getId());
 
-    for(CartItem cartItem : cart.getCartItems())
-    {
-      if(cartItem.getFoodId().equals(cart))
+    for (CartItem cartItem : cart.getCartItems()) {
+      if (cartItem.getFoodId().equals(req.getFoodId())) {
+        int newQuantity = cartItem.getQuantity() + req.getQuantity();
+        return updateCartItemQuantity(cartItem.getId(), newQuantity);
+      }
     }
+    CartItem newCartItem = new CartItem();
+    newCartItem.setFoodId(req.getFoodId());
+    newCartItem.setCartId(cart.getId());
+    newCartItem.setQuantity(req.getQuantity());
+    newCartItem.setIngredients(req.getIngredients());
+    newCartItem.setTotalPrice(req.getTotalPrice());
+
+    CartItem savCartItem = cartItemRepository.save(newCartItem);
+    cart.getCartItems().add(savCartItem);
+    return savCartItem;
   }
 
   @Override
