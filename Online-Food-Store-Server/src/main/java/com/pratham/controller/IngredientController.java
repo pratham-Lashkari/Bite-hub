@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pratham.model.IngredientCategoryModel;
+import com.pratham.model.IngredientsItem;
 import com.pratham.request.IngredientCategoryRequest;
+import com.pratham.request.IngredientRequest;
 import com.pratham.service.impl.IngredientServiceImpl;
 
 @RestController
@@ -19,10 +21,20 @@ public class IngredientController {
   @Autowired
   private IngredientServiceImpl ingredientServiceImpl;
 
-  @PostMapping("/create")
+  @PostMapping("/category")
   public ResponseEntity<IngredientCategoryModel> createIngredientCategory(@RequestBody IngredientCategoryRequest req)
       throws Exception {
     IngredientCategoryModel item = ingredientServiceImpl.createIngredientCategory(req.getName(), req.getRestaurantId());
     return new ResponseEntity<>(item, HttpStatus.CREATED);
+  }
+
+  @PostMapping("/")
+  public ResponseEntity<IngredientsItem> createIngredientItem(@RequestBody IngredientRequest req)
+      throws Exception {
+
+    IngredientsItem item = ingredientServiceImpl.createIngredientItem(req.getRestaurantId(), req.getName(),
+        req.getCategoryId());
+    return new ResponseEntity<>(item, HttpStatus.CREATED);
+
   }
 }
