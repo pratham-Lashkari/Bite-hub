@@ -16,6 +16,8 @@ public interface CartService {
 
   public Cart findCartById(String id) throws Exception;
 
+  public Cart findCartByUserId(String userId) throws Exception;
+
   public Cart clearCart(String userId) throws Exception;
 
 }

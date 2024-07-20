@@ -78,21 +78,37 @@ public class CartServiceImlp implements CartService {
     }
     CartItem item = cartItemOptional.get();
     cart.getCartItems().remove(item);
-    return cartRepository.save(cart);\
+    return cartRepository.save(cart);
   }
 
   @Override
   public Long calculateCartTotals(Cart cart) throws Exception {
-    return null;
+    Long total = 0L;
+    for (CartItem cartItem : cart.getCartItems()) {
+      Food food = foodService.findFoodById(cartItem.getFoodId());
+      total += food.getPrice() * cartItem.getQuantity();
+    }
+    return total;
   }
 
   @Override
   public Cart findCartById(String id) throws Exception {
-    return null;
+    Optional<Cart> optCart = cartRepository.findById(id);
+    if (optCart.isEmpty()) {
+      throw new Exception("Cart item not found");
+    }
+    return optCart.get();
   }
 
   @Override
   public Cart clearCart(String userId) throws Exception {
-    return null;
+    Cart cart = findCartByUserId(userId);
+    cart.getCartItems().clear();
+    return cartRepository.save(cart);
+  }
+
+  @Override
+  public Cart findCartByUserId(String userId) throws Exception {
+    return cartRepository.findByCustomerId(userId);
   }
 }
