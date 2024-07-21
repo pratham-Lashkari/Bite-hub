@@ -101,8 +101,9 @@ public class CartServiceImlp implements CartService {
   }
 
   @Override
-  public Cart clearCart(String userId) throws Exception {
-    Cart cart = findCartByUserId(userId);
+  public Cart clearCart(String jwt) throws Exception {
+    User user = userService.findUserByJwtToken(jwt);
+    Cart cart = findCartByUserId(user.getId());
     cart.getCartItems().clear();
     return cartRepository.save(cart);
   }
