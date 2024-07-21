@@ -13,7 +13,7 @@ public class OrderItem {
 
   @Id
   private String id;
-  private Food food;
+  private String foodId;
   private int quantity;
   private Long totalPrice;
   private List<String> ingredients;
