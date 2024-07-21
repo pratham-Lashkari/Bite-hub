@@ -3,6 +3,8 @@ package com.pratham.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,25 +95,44 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public Order updateOrder(String orderId, String orderStatus) throws Exception {
 
-    throw new UnsupportedOperationException("Unimplemented method 'updateOrder'");
+    Order order = findOrderById(orderId);
+    if (orderStatus.equals("OUT_FOR_DELIVERY") || orderStatus.equals("DELIVERED") || orderStatus.equals("COMPLETED")
+        || orderStatus.equals("PENDING")) {
+      order.setOrderStatus(orderStatus);
+      return orderRepository.save(order);
+    }
+    throw new Exception("Please send a valid order status");
   }
 
   @Override
   public void cancelOrder(String orderId) throws Exception {
 
-    throw new UnsupportedOperationException("Unimplemented method 'cancelOrder'");
+    Order order = findOrderById(orderId);
+    orderRepository.deleteById(order.getId());
   }
 
   @Override
   public List<Order> getUserOrder(String userId) throws Exception {
-
-    throw new UnsupportedOperationException("Unimplemented method 'getUserOrder'");
+    return orderRepository.findByUserId(userId);
   }
 
   @Override
   public List<Order> getRestaurantsOrder(String restaurantId, String orderStatus) throws Exception {
 
-    throw new UnsupportedOperationException("Unimplemented method 'getRestaurantsOrder'");
+    List<Order> orders = orderRepository.findByRestaurantId(restaurantId);
+    if (orderStatus != null) {
+      orders = orders.stream().filter(order -> order.getOrderStatus().equals(orderStatus)).collect(Collectors.toList());
+    }
+    return orders;
+  }
+
+  @Override
+  public Order findOrderById(String orderId) throws Exception {
+    Optional<Order> order = orderRepository.findById(orderId);
+    if (order.isEmpty()) {
+      throw new Exception("Order not found");
+    }
+    return order.get();
   }
 
 }
