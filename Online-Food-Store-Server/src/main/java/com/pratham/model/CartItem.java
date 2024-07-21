@@ -21,12 +21,7 @@ public class CartItem {
   private String cartId;
   private String foodId;
   private int quantity;
-  private int totalPrice;
+  private Long totalPrice;
   private List<String> ingredients;
-
-  public void setTotalPrice(long l) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'setTotalPrice'");
-  }
 
 }

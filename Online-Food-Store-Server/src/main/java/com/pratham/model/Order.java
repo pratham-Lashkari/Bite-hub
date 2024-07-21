@@ -25,8 +25,8 @@ public class Order {
   private String orderStatus;
   private Date createdAt;
   private String deliveryAddressId;
-  private List<OrderItem> orderItems = new ArrayList<>();
+  private List<String> orderItemId = new ArrayList<>();
   // private Payment payment;
   private int totalItem;
-  private int totalPrice;
+  private Long totalPrice;
 }

@@ -9,6 +9,6 @@ public class AddCartItemRequest {
 
   private String foodId;
   private int quantity;
-  private int totalPrice;
+  private Long totalPrice;
   private List<String> ingredients;
 }
