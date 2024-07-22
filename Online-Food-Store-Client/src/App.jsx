@@ -3,6 +3,7 @@ import {ThemeProvider} from '@mui/material'
 import { darkTheme } from './Theme/DarkTheme'
 import NavBar from './Component/NavBar'
 import CssBaseline from '@mui/material/CssBaseline';
+import './App.css'
 
 function App() {
 
