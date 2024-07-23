@@ -1,5 +1,7 @@
 import React from "react";
 import '../styles/Home.scss'
+import MultiCarousel from "./MultiCarousel";
+
 const Home = () => {
   return (
     <div className="">
@@ -11,8 +13,12 @@ const Home = () => {
           </p>
         </div>
         <div className="cover absolute top-0 left-0 ring-0">
-
         </div>
+      </section>
+      <section className="p-10 lg:py-10 lg:px-20">
+        <p className="text-2xl font-semibold text-gray-400 py-3
+         pb-10">Top Meals</p>
+        <MultiCarousel/>
       </section>
     </div>
   );

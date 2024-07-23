@@ -7,9 +7,21 @@ import CarouselItem from './CarouselItem';
 
 
 const MultiCarousel = () => {
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    autoplaySpeed: 2000,
+    cssEase: "linear"
+  };
+
   return (
     <div>
-      <Slider>
+      <Slider {...settings}>
         {
           topMeals.map((item , ind)=>{
             return <CarouselItem 
