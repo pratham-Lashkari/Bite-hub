@@ -1,7 +1,9 @@
 import React from "react";
 import '../styles/Home.scss'
 import MultiCarousel from "./MultiCarousel";
+import RestaurantCard from "./RestaurantCard";
 
+const restaurat = [1,2,3,4,5];
 const Home = () => {
   return (
     <div className="">
@@ -25,8 +27,10 @@ const Home = () => {
         <h1 className="text-2xl font-semibold text-gray-500 py-3">
           Order For Our handpick Favourites
         </h1>
-        <div>
-          
+        <div className="flex flex-wrap items-center justify-around gap-5">
+            {
+              restaurat.map((i)=><RestaurantCard key={i}/>)
+            }
         </div>
       </section>
     </div>
