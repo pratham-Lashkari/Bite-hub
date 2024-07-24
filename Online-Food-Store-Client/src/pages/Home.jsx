@@ -1,7 +1,7 @@
 import React from "react";
 import '../styles/Home.scss'
-import MultiCarousel from "./MultiCarousel";
-import RestaurantCard from "./RestaurantCard";
+import MultiCarousel from "../Component/Carousels/MultiCarousel";
+import RestaurantCard from "../Component/Restaurant/RestaurantCard";
 
 const restaurat = [1,2,3,4,5];
 const Home = () => {

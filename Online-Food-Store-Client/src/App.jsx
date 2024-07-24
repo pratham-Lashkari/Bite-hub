@@ -4,7 +4,7 @@ import { darkTheme } from './Theme/DarkTheme'
 import NavBar from './Component/NavBar'
 import CssBaseline from '@mui/material/CssBaseline';
 import './App.css'
-import Home from './Component/Home';
+import Home from './pages/Home';
 
 function App() {
 
