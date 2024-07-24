@@ -1,9 +1,21 @@
-import React from "react";
-import { Divider, Grid } from "@mui/material";
+import React, { useState } from "react";
+import {
+  Divider,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import { foodTypes } from "../../constants/RestaurantDetailsFilter";
 
 const RestaurantDetails = () => {
+
+  const [foodType , setFoodType] = useState("all");
+
   return (
     <div className="px-5 lg:px-20">
       <section>
@@ -56,8 +68,28 @@ const RestaurantDetails = () => {
       </section>
       <Divider />
       <section className="pt-[2rem] lg:flex relative">
-        <div className="space-y-10 lg:w-[20%] filter"></div>
-        <div className="space-y-10 lg:w-[20%] filter"></div>
+        <div className="space-y-10 lg:w-[20%] filter">
+          <div className="box space-y-5 lg:sticky top-28">
+            <div>
+              <Typography variant="h5" sx={{ paddingBottom: "1rem" }}>
+                Food Type
+              </Typography>
+              <FormControl className="py-10 space-y-5" component={"fieldset"}>
+                <RadioGroup name="food_type" value={foodType || "all"}>  
+                    {
+                      foodTypes.map((item,ind)=>
+                      <FormControlLabel 
+                      key={ind}
+                      value={item.value} 
+                      control={<Radio />} 
+                      label={item.label} />)
+                    }
+                </RadioGroup>
+              </FormControl>
+            </div>
+          </div>
+        </div>
+        <div className="space-y-5 lg:w-[80%] lg:pl-10">menu</div>
       </section>
     </div>
   );
