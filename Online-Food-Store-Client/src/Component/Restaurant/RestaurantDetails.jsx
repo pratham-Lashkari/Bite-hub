@@ -10,7 +10,8 @@ import {
 } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import { categories, foodTypes } from "../../constants/RestaurantDetailsFilter"; // Corrected import path
+import { categories, foodTypes, menuCards } from "../../constants/RestaurantDetailsFilter";
+import MenuCard from "./MenuCard";
 
 const RestaurantDetails = () => {
   const [foodType, setFoodType] = useState("all");
@@ -116,7 +117,11 @@ const RestaurantDetails = () => {
             </div>
           </div>
         </div>
-        <div className="space-y-5 lg:w-[80%] lg:pl-10">menu</div>
+        <div className="space-y-5 lg:w-[80%] lg:pl-10">
+          {
+            menuCards.map((item , ind )=><MenuCard key={ind}/>)
+          }
+        </div>
       </section>
     </div>
   );

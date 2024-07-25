@@ -6,3 +6,5 @@ export const foodTypes = [
   {label : "Non-Vegetarian" , value:"non_vegetarain"},
   {label : "Seasonal" , value:"seasonal"},
 ]
+
+export const menuCards = [1,2,3,4,5,6,7]
