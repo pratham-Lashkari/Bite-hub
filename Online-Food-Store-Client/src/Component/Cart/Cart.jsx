@@ -1,10 +1,14 @@
-import { Divider } from "@mui/material";
+import { Button, Card, Divider } from "@mui/material";
 import React from "react";
 import CartItem from "./CartItem";
+import AddressCard from "./AddressCard";
+import AddLocationIcon from "@mui/icons-material/AddLocation";
 
 const Cart = () => {
+  const handleSelectAddress = () => {};
+  const handleOpenAddressModal = () => {};
+
   return (
-    <div>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
           {[1, 2].map((ind) => (
@@ -41,12 +45,33 @@ const Cart = () => {
               Choose Delivery Address
             </h1>
             <div className="flex gap-5 flex-wrap justify-center">
-              
+              {[1, 2, 3].map((item) => (
+                <AddressCard
+                  item={item}
+                  showButton={true}
+                  handleSelectAddress={handleSelectAddress}
+                />
+              ))}
+              <Card className="flex gap-5 w-64 p-5">
+                <AddLocationIcon />
+                <div className="space-y-3 text-gray-500">
+                  <h1 className="font-semibold text-lg text-white">
+                    Add Address
+                  </h1>
+                  <p>Create a new Address for your order</p>
+                  <Button
+                    variant="contained"
+                    fullWidth
+                    onClick={() => handleOpenAddressModal()}
+                  >
+                    Add
+                  </Button>
+                </div>
+              </Card>
             </div>
           </div>
         </section>
       </main>
-    </div>
   );
 };
 
