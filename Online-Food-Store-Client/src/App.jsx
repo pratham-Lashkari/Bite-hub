@@ -7,6 +7,7 @@ import './App.css'
 import Home from './pages/Home';
 import RestaurantDetails from './Component/Restaurant/RestaurantDetails';
 import Cart from './Component/Cart/Cart';
+import Profile from './Component/Profile/Profile';
 
 function App() {
 
@@ -16,7 +17,8 @@ function App() {
             <NavBar/>
             {/* <Home/> */}
             {/* <RestaurantDetails/> */}
-            <Cart/>
+            {/* <Cart/> */}
+            <Profile/>
         </ThemeProvider>
   )
 }
