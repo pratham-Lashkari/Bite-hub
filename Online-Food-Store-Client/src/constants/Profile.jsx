@@ -7,7 +7,7 @@ import EventIcon from '@mui/icons-material/Event';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddReactionIcon from '@mui/icons-material/AddReaction';
 
-export const menu= [
+export const profileMenu= [
   {title : "Orders" , icon :<ShoppingBagIcon/> },
   {title : "Favourites" , icon :<FavoriteIcon/> },
   {title : "Home" , icon :<HomeIcon/> },
