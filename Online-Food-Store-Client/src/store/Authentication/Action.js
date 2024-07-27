@@ -7,7 +7,10 @@ import {
   GET_USER_SUCCESS,
   ADD_TO_FAVORITE_REQUEST,
   ADD_TO_FAVORITE_SUCCESS,
-  LOGOUT
+  LOGOUT,
+  REGISTER_FAILURE,
+  GET_USER_FAILURE,
+  ADD_TO_FAVORITE_FAILURE
 } from "./ActionTypes";
 import axios from "axios";
 import { api, API_URL } from "../../constants/api";
@@ -27,6 +30,7 @@ export const registerUser = (reqData) => async (dispatch) => {
     }
     dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
   } catch (error) {
+    dispatch({type : REGISTER_FAILURE , payload : error});
     console.log("Error ", error);
   }
 };
@@ -46,6 +50,7 @@ export const loginUser = (reqData) => async (dispatch) => {
     }
     dispatch({ type: LOGIN_SUCCESS, payload: data.jwt });
   } catch (error) {
+    dispatch({type : LOGIN_SUCCESS , payload : error});
     console.log("Error ", error);
   }
 };
@@ -66,6 +71,7 @@ export const getUser = (jwt) => async (dispatch) => {
     }
     dispatch({ type: GET_USER_SUCCESS, payload: data });
   } catch (error) {
+    dispatch({type : GET_USER_FAILURE , payload : error});
     console.log("Error ", error);
   }
 };
@@ -81,6 +87,7 @@ export const addToFavorite = (jwt , restaurantId) => async (dispatch) => {
     
     dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
   } catch (error) {
+    dispatch({type : ADD_TO_FAVORITE_FAILURE , payload : error});
     console.log("Error ", error);
   }
 };
@@ -89,6 +96,7 @@ export const addToFavorite = (jwt , restaurantId) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     dispatch({ type: LOGOUT});
+    localStorage.clear();
     console.log("logout success")
   } catch (error) {
     console.log("Error ", error);
