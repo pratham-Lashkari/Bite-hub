@@ -7,7 +7,7 @@ const Orders = () => {
       <h1 className="text-xl text-center py-7 font-semibold">My Orders</h1>
       <div className="space-y-5 w-full lg:w-1/2">
         {
-          [1,2,3,4,5].map((item , ind) => <OrderCard key={ind}/>)
+          [1,2,3].map((item , ind) => <OrderCard key={ind}/>)
         }</div>
     </div>
   );
