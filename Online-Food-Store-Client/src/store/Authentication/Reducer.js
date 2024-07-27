@@ -10,7 +10,7 @@ const intialState = {
   success : null,
 }
 
-const authReducer = (state = intialState , action)=>
+export const authReducer = (state = intialState , action)=>
 {
   switch(action.type)
   {
