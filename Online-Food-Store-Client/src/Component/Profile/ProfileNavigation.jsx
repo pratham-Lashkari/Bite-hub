@@ -4,7 +4,7 @@ import { profileMenu } from "../../constants/Profile";
 import {useNavigate} from 'react-router-dom'
 
 const ProfileNavigation = ({ open = true, handleClose }) => {
-  const isSmallScreen = useMediaQuery('(min-width:800px)');
+  const isSmallScreen = useMediaQuery('(min-width:1600px)');
   const navigate = useNavigate();
 
   const handleNavigate = (item)=>{

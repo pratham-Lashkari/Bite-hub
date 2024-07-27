@@ -8,7 +8,7 @@ import Profile from '../Profile/Profile'
 const CustomRoutes = () => {
   return (
     <div>
-      <NavBar/>
+      {/* <NavBar/> */}
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/account/:register' element={<Home/>}/>
