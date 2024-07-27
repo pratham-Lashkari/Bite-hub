@@ -5,6 +5,7 @@ import Home from '../../pages/Home'
 import RestaurantDetails from '../Restaurant/RestaurantDetails'
 import Cart from '../Cart/Cart'
 import Profile from '../Profile/Profile'
+import Auth from '../Auth/Auth'
 const CustomRoutes = () => {
   return (
     <div>
@@ -16,6 +17,7 @@ const CustomRoutes = () => {
         <Route path='/cart' element={<Cart/>}/>
         <Route path='/my-profile/*' element={<Profile/>}/>
       </Routes>
+      <Auth/>
     </div>
   )
 }
