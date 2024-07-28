@@ -1,5 +1,5 @@
 import { isPresentInFavorites } from "../../constants/utils"
-import { ADD_TO_FAVORITE_FAILURE, ADD_TO_FAVORITE_REQUEST, ADD_TO_FAVORITE_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from "./ActionTypes"
+import { ADD_TO_FAVORITE_FAILURE, ADD_TO_FAVORITE_REQUEST, ADD_TO_FAVORITE_SUCCESS, GET_USER_FAILURE, GET_USER_REQUEST, GET_USER_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from "./ActionTypes"
 
 const intialState = {
   user : null,
@@ -20,6 +20,9 @@ export const authReducer = (state = intialState , action)=>
     case ADD_TO_FAVORITE_REQUEST:
       return {...state , isLoading : true , token : action.payload, error : null , success : null}
     
+    case GET_USER_SUCCESS:
+      return {...state , isLoading : false , user :action.payload , error : null , success : true}
+      
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       return {

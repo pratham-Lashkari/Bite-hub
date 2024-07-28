@@ -65,6 +65,8 @@ export const getUser = (token, navigate) => async (dispatch) => {
         Authorization: `Bearer ${token}`
       }
     });
+    dispatch({ type: GET_USER_SUCCESS , payload : data });
+
     if (data.role === "ROLE_RESTAURANT_OWNER") {
       navigate("/admin/restaurant");
     } else {
