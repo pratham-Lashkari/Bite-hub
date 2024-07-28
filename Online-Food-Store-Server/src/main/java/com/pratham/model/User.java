@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pratham.Dto.RestaurantDto;
 import com.pratham.enums.USER_ROLE;
@@ -26,7 +25,6 @@ public class User {
   private String fullName;
   private String email;
 
-  @JsonIgnore
   @JsonProperty(value = "password")
   private String password;
   private USER_ROLE role;

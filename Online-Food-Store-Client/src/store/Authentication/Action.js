@@ -22,13 +22,13 @@ export const registerUser = (reqData) => async (dispatch) => {
       `${API_URL}/auth/signup`,
       reqData.userData
     );
-    if (data.jwt) localStorage.setItem("jwt", data.jwt);
+    if (data.token) localStorage.setItem("token", data.token);
     if (data.role === "ROLE_RESTAURANT_OWNER") {
       reqData.navigate("/admin/restaurant");
     } else {
       reqData.navigate("/");
     }
-    dispatch({ type: REGISTER_SUCCESS, payload: data.jwt });
+    dispatch({ type: REGISTER_SUCCESS, payload: data.token });
   } catch (error) {
     dispatch({type : REGISTER_FAILURE , payload : error});
     console.log("Error ", error);
@@ -42,46 +42,48 @@ export const loginUser = (reqData) => async (dispatch) => {
       `${API_URL}/auth/login`,
       reqData.userData
     );
-    if (data.jwt) localStorage.setItem("jwt", data.jwt);
+    if (data.token) localStorage.setItem("token", data.token);
     if (data.role === "ROLE_RESTAURANT_OWNER") {
       reqData.navigate("/admin/restaurant");
     } else {
       reqData.navigate("/");
     }
-    dispatch({ type: LOGIN_SUCCESS, payload: data.jwt });
+    dispatch({ type: LOGIN_SUCCESS, payload: data.token });
   } catch (error) {
     dispatch({type : LOGIN_SUCCESS , payload : error});
     console.log("Error ", error);
   }
 };
 
-export const getUser = (jwt) => async (dispatch) => {
+export const getUser = (token, navigate) => async (dispatch) => {
+  console.log("Token is =  " + token)
   dispatch({ type: GET_USER_REQUEST });
   try {
-    const { data } = await api.get("/auth/login",{
-      headers:{
-        Authorization : `Bearer ${jwt}`
+    const { data } = await axios.get(`${API_URL}/users/profile`,{
+      headers: {
+        "Content-Type" : "application/json",
+        Authorization: `Bearer ${token}`
       }
-      });
-    if (data.jwt) localStorage.setItem("jwt", data.jwt);
+    });
     if (data.role === "ROLE_RESTAURANT_OWNER") {
-      reqData.navigate("/admin/restaurant");
+      navigate("/admin/restaurant");
     } else {
-      reqData.navigate("/");
+      navigate("/");
     }
+    
     dispatch({ type: GET_USER_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({type : GET_USER_FAILURE , payload : error});
+    dispatch({ type: GET_USER_FAILURE, payload: error });
     console.log("Error ", error);
   }
 };
 
-export const addToFavorite = (jwt , restaurantId) => async (dispatch) => {
+export const addToFavorite = (token , restaurantId) => async (dispatch) => {
   dispatch({ type: ADD_TO_FAVORITE_REQUEST });
   try {
-    const { data } = await api.put(`/auth/restaurants/${restaurantId}/add-favorite`,{
+    const { data } = await api.put(`/api/restaurant/${restaurantId}/add-favourites`,{
       headers:{
-        Authorization : `Bearer ${jwt}`
+        Authorization : `Bearer ${token}`
       }
       });
     

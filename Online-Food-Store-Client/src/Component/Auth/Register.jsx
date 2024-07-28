@@ -25,8 +25,8 @@ const Register = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values) => {
-    dispatch(registerUser({ userData: values, navigate }));
     console.log(values);
+    dispatch(registerUser({ userData: values, navigate }));
   };
 
   return (

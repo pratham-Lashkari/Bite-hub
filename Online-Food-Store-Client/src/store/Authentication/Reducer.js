@@ -5,7 +5,7 @@ const intialState = {
   user : null,
   isLoading : false,
   error : null,
-  jwt : null,
+  token : null,
   favorites : [],
   success : null,
 }
@@ -18,14 +18,14 @@ export const authReducer = (state = intialState , action)=>
     case LOGIN_REQUEST:
     case GET_USER_REQUEST:
     case ADD_TO_FAVORITE_REQUEST:
-      return {...state , isLoading : true , error : null , success : null}
+      return {...state , isLoading : true , token : action.payload, error : null , success : null}
     
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
       return {
         ...state,
         isLoading : false,
-        jwt : action.payload,
+        token : action.payload,
         success : "Register Success"
       }
     case ADD_TO_FAVORITE_SUCCESS:

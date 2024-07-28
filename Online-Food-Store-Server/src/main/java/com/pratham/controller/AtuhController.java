@@ -47,6 +47,7 @@ public class AtuhController {
 
   @PostMapping("/signup")
   public ResponseEntity<AuthResponse> createUserHandler(@RequestBody User user) throws Exception {
+    System.out.println(user);
     User isUserExist = userRepository.findByEmail(user.getEmail());
     if (isUserExist != null) {
       throw new Exception("Email already is exists");
