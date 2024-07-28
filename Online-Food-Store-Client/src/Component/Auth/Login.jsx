@@ -4,13 +4,16 @@ import { Formik, Form, Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../store/Authentication/Action";
-const initalValues = {
-  eamil: "",
+
+const initialValues = {
+  email: "",
   password: "",
 };
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleSubmit = (values) => {
     dispatch(loginUser({ userData: values, navigate }));
   };
@@ -20,7 +23,7 @@ const Login = () => {
       <Typography variant="h5" className="text-center">
         Login
       </Typography>
-      <Formik onSubmit={handleSubmit} initalValues={initalValues}>
+      <Formik onSubmit={handleSubmit} initialValues={initialValues}>
         <Form>
           <Field
             as={TextField}
@@ -29,7 +32,7 @@ const Login = () => {
             fullWidth
             variant="outlined"
             margin="normal"
-          ></Field>
+          />
           <Field
             margin="normal"
             as={TextField}
@@ -37,7 +40,7 @@ const Login = () => {
             name="password"
             fullWidth
             variant="outlined"
-          ></Field>
+          />
           <Button
             sx={{ mt: 2, padding: "1rem" }}
             fullWidth
@@ -51,7 +54,7 @@ const Login = () => {
       <Typography variant="body2" align="center" sx={{ mt: 3 }}>
         Don't have an account?
         <Button size="small" onClick={() => navigate("/account/register")}>
-          register
+          Register
         </Button>
       </Typography>
     </div>
