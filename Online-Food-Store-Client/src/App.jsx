@@ -17,7 +17,7 @@ function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const { auth } = useSelector((store) => store);
-
+  // console.log("app ,jsx " + auth.user.fullName);
   useEffect(() => {
     dispatch(getUser(auth.token || token));
   }, [auth.token]);

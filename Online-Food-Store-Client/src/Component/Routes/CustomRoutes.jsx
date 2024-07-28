@@ -1,25 +1,28 @@
-import React from 'react'
-import NavBar from '../NavBar'
-import { Route, Routes } from 'react-router-dom'
-import Home from '../../pages/Home'
-import RestaurantDetails from '../Restaurant/RestaurantDetails'
-import Cart from '../Cart/Cart'
-import Profile from '../Profile/Profile'
-import Auth from '../Auth/Auth'
+import React from "react";
+import NavBar from "../NavBar";
+import { Route, Routes } from "react-router-dom";
+import Home from "../../pages/Home";
+import RestaurantDetails from "../Restaurant/RestaurantDetails";
+import Cart from "../Cart/Cart";
+import Profile from "../Profile/Profile";
+import Auth from "../Auth/Auth";
 const CustomRoutes = () => {
   return (
     <div>
-      {/* <NavBar/> */}
+      {/* <NavBar /> */}
       <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/account/:register' element={<Home/>}/>
-        <Route path='/restaurant/:city/:title/:id' element={<RestaurantDetails/>}/>
-        <Route path='/cart' element={<Cart/>}/>
-        <Route path='/my-profile/*' element={<Profile/>}/>
+        <Route path="/" element={<Home />} />
+        <Route path="/account/:register" element={<Home />} />
+        <Route
+          path="/restaurant/:city/:title/:id"
+          element={<RestaurantDetails />}
+        />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/my-profile/*" element={<Profile />} />
       </Routes>
-      <Auth/>
+      <Auth />
     </div>
-  )
-}
+  );
+};
 
-export default CustomRoutes
+export default CustomRoutes;

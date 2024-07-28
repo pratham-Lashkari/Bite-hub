@@ -10,7 +10,13 @@ import { useSelector } from "react-redux";
 const NavBar = () => {
   const navigate = useNavigate();
   const { auth } = useSelector((store) => store);
-  const name = auth.user.fullName;
+  const handleAvatarClick = () => {
+    if (auth.user.role === "ROLE_CUSTOMER") {
+      navigate("/my-profile");
+    } else {
+      navigate("/admin/restaurant");
+    }
+  };
   return (
     <Box className="px-5 z-50 sticky top-0 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between">
       <div className="flex items-center space-x-4 lg:mr-10 cursor-pointer">
@@ -24,8 +30,11 @@ const NavBar = () => {
         </div>
         <div className="">
           {auth.user ? (
-            <Avatar sx={{ bgcolor: "white", color: pink.A400 }}>
-              {name.charAt(0)}
+            <Avatar
+              onClick={handleAvatarClick}
+              sx={{ bgcolor: "white", color: pink.A400 }}
+            >
+              {auth.user.fullName.charAt(0).toUpperCase()}
             </Avatar>
           ) : (
             <IconButton onClick={() => navigate("/account/login")}>
