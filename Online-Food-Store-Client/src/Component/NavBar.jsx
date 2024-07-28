@@ -20,7 +20,12 @@ const NavBar = () => {
   return (
     <Box className="px-5 z-50 sticky top-0 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between">
       <div className="flex items-center space-x-4 lg:mr-10 cursor-pointer">
-        <li className="logo font-bold text-gray-300 text-2xl">BiteHub</li>
+        <li
+          onClick={() => navigate("/")}
+          className="logo font-bold text-gray-300 text-2xl"
+        >
+          BiteHub
+        </li>
       </div>
       <div className="flex items-center space-x-2 lg:space-x-10">
         <div className="">

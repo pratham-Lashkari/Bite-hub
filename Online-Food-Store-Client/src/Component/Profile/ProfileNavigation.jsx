@@ -10,8 +10,9 @@ const ProfileNavigation = ({ open = true, handleClose }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleNavigate = (item) => {
-    if ((item.title = "Logout")) {
+    if (item.title === "Logout") {
       dispatch(logout());
+      navigate("/");
     }
     navigate(`/my-profile/${item.title.toLowerCase()}`);
   };
