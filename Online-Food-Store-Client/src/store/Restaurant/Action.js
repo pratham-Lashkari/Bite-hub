@@ -1,16 +1,4 @@
 import { 
-  REGISTER_REQUEST,
-  REGISTER_SUCCESS,
-  REGISTER_FAILURE,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  GET_USER_FAILURE,
-  ADD_TO_FAVORITE_REQUEST,
-  ADD_TO_FAVORITE_SUCCESS,
-  ADD_TO_FAVORITE_FAILURE,
   CREATE_RESTAURANT_REQUEST,
   CREATE_RESTAURANT_SUCCESS,
   CREATE_RESTAURANT_FAILURE,
@@ -52,4 +40,109 @@ import {
   GET_RESTAURANT_CATEGORY_FAILURE 
 } from './ActionTypes';
 
+import axios from 'axios'
+import { API_URL } from "../../constants/api";
 
+export const getAllRestaurantsAction = (token) =>{
+  return async (dispatch)=>{
+    dispatch({type : GET_ALL_RESTAURANTS_REQUEST});
+    try {
+      const {data} = await axios.get(`${API_URL}/api/restaurant`,{
+        headers :{
+          "Content-Type" : "application/json",
+           Authorization: `Bearer ${token}`
+        }
+      });
+      dispatch({type : GET_ALL_RESTAURANTS_SUCCESS , payload : data});
+    } catch (error) {
+      dispatch({type : GET_ALL_RESTAURANTS_FAILURE , payload : error})
+    }
+  }
+}
+
+export const getRestaurantById =(reqData)=>{
+    return async (dispatch)=>{
+      dispatch({type : GET_RESTAURANT_BY_ID_REQUEST});
+      try {
+        const {data} = await axios.get(`${API_URL}/api/restaurant/${reqData.id}`,{
+          headers :{
+            "Content-Type" : "application/json",
+             Authorization: `Bearer ${reqData.token}`
+          }
+        });
+        dispatch({type : GET_RESTAURANT_BY_ID_SUCCESS , payload : data});
+      } catch (error) {
+        dispatch({type : GET_RESTAURANT_BY_ID_FAILURE , payload : error});
+      }
+    }
+}
+
+export const getRestaurantByUserId =(token)=>{
+  return async (dispatch)=>{
+    dispatch({type : GET_RESTAURANT_BY_USER_ID_REQUEST});
+    try {
+      const {data} = await axios.get(`${API_URL}/api/admin/restaurants/user`,{
+        headers :{
+          "Content-Type" : "application/json",
+           Authorization: `Bearer ${token}`
+        }
+      });
+      dispatch({type : GET_RESTAURANT_BY_USER_ID_SUCCESS , payload : data});
+    } catch (error) {
+      dispatch({type : GET_RESTAURANT_BY_USER_ID_FAILURE , payload : error});
+    }
+  }
+}
+
+
+export const createRestaurant =(reqData)=>{
+  return async (dispatch)=>{
+    dispatch({type : CREATE_RESTAURANT_REQUEST});
+    try {
+      const {data} = await axios.post(`${API_URL}/api/admin/restaurants/create`,reqData,{
+        headers :{
+          "Content-Type" : "application/json",
+           Authorization: `Bearer ${reqData.token}`
+        }
+      });
+      dispatch({type : CREATE_RESTAURANT_SUCCESS , payload : data});
+    } catch (error) {
+      dispatch({type : CREATE_RESTAURANT_FAILURE , payload : error});
+    }
+  }
+}
+
+export const updateRestaurant =({restaurantId , restaurantData, token})=>{
+  return async (dispatch)=>{
+    dispatch({type : UPDATE_RESTAURANT_REQUEST});
+    try {
+      const {data} = await axios.put(`${API_URL}/api/admin/restaurants/${restaurantId}`,restaurantData,{
+        headers :{
+          "Content-Type" : "application/json",
+           Authorization: `Bearer ${token}`
+        }
+      });
+      dispatch({type : UPDATE_RESTAURANT_SUCCESS , payload : data});
+    } catch (error) {
+      dispatch({type : UPDATE_RESTAURANT_FAILURE , payload : error});
+    }
+  }
+}
+
+
+export const deleteRestaurant =({restaurantId , token})=>{
+  return async (dispatch)=>{
+    dispatch({type : DELETE_RESTAURANT_REQUEST});
+    try {
+      const {data} = await axios.delete(`${API_URL}/api/admin/restaurants/${restaurantId}`,{
+        headers :{
+          "Content-Type" : "application/json",
+           Authorization: `Bearer ${token}`
+        }
+      });
+      dispatch({type : DELETE_RESTAURANT_SUCCESS , payload : data});
+    } catch (error) {
+      dispatch({type : DELETE_RESTAURANT_FAILURE , payload : error});
+    }
+  }
+}
