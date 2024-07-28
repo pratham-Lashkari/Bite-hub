@@ -10,7 +10,7 @@ const initailState = {
   categories : []
 }
 
-const restaurantReducer =(state = initailState , action)=>{
+export const restaurantReducer =(state = initailState , action)=>{
 
   switch (action.type) {
     case actionTypes.CREATE_RESTAURANT_REQUEST:
