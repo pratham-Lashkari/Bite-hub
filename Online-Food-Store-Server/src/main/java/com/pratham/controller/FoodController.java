@@ -22,9 +22,9 @@ public class FoodController {
   private FoodService foodService;
 
   @GetMapping("/search")
-  public ResponseEntity<List<Food>> searchFood(@RequestParam String keyword) throws Exception {
+  public ResponseEntity<List<Food>> searchFood(@RequestParam String name) throws Exception {
 
-    List<Food> foods = foodService.searchFood(keyword);
+    List<Food> foods = foodService.searchFood(name);
     return new ResponseEntity<>(foods, HttpStatus.OK);
   }
 
