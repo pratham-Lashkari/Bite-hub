@@ -89,3 +89,20 @@ export const updateCartItem = (reqData) => {
     }
   };
 };
+
+export const removeCartItem = ({cartItemId , token}) => {
+  return async (dispatch) => {
+    dispatch({ type: REMOVE_CART_ITEM_REQUEST });
+    try {
+      const {data} = await axios.delete(`${API_URL}/api/cart-item/{id}/remove`,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: REMOVE_CART_ITEM_SUCCESS, payload : data});
+    } catch (error) {
+      dispatch({ type: REMOVE_CART_ITEM_FAILURE , payload : error });
+    }
+  };
+};
