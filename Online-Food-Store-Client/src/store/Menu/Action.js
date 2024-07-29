@@ -108,3 +108,25 @@ export const updateMenuItemsAvailability = ({foodId , token}) => {
   };
 };
 
+
+export const deleteFoodAction = ({foodId , token}) => {
+  return async (dispatch) => {
+    dispatch({ type: DELETE_MENU_ITEM_REQUEST });
+    try {
+      const { data } = await axios.delete(`${API_URL}/api/admin/food/${foodId}`,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      dispatch({ type: DELETE_MENU_ITEM_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: DELETE_MENU_ITEM_FAILURE,
+        payload: error,
+      });
+    }
+  };
+};
+
