@@ -36,3 +36,5 @@ const restaurantsOrderReducer = (state = intialState, action) => {
       return state;
   }
 };
+
+export default restaurantsOrderReducer;
