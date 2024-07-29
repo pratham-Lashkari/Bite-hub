@@ -39,7 +39,6 @@ export const findCart = (token) => {
   };
 };
 
-
 export const getAllCartItems = (reqData) => {
   return async (dispatch) => {
     dispatch({ type: GET_ALL_CART_REQUEST });
@@ -57,7 +56,6 @@ export const getAllCartItems = (reqData) => {
   };
 };
 
-
 export const addItemToCart = (reqData) => {
   return async (dispatch) => {
     dispatch({ type: ADD_ITEM_TO_CART_REQUEST });
@@ -71,6 +69,23 @@ export const addItemToCart = (reqData) => {
       dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload : data});
     } catch (error) {
       dispatch({ type: ADD_ITEM_TO_CART_FAILURE , payload : error });
+    }
+  };
+};
+
+export const updateCartItem = (reqData) => {
+  return async (dispatch) => {
+    dispatch({ type: UPDATE_CART_REQUEST });
+    try {
+      const {data} = await axios.put(`${API_URL}/api/cart-item/update`, reqData.data,{
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: UPDATE_CART_SUCCESS, payload : data});
+    } catch (error) {
+      dispatch({ type: UPDATE_CART_FAILURE , payload : error });
     }
   };
 };
