@@ -17,6 +17,42 @@ import {
   REMOVE_CART_ITEM_REQUEST,
   REMOVE_CART_ITEM_SUCCESS,
   REMOVE_CART_ITEM_FAILURE,
-} from './ActionTypes';
+} from "./ActionTypes";
 
-import acios from 'axios'
+import axios from "axios";
+import { API_URL } from "../../constants/api";
+
+export const findCart = (token) => {
+  return async (dispatch) => {
+    dispatch({ type: FIND_CART_REQUEST });
+    try {
+      const {data} = await axios.get(`${API_URL}/api/cart`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: FIND_CART_SUCCESS , payload : data });
+    } catch (error) {
+      dispatch({ type: FIND_CART_FAILURE , payload : error });
+    }
+  };
+};
+
+
+export const getAllCartItems = (reqData) => {
+  return async (dispatch) => {
+    dispatch({ type: GET_ALL_CART_REQUEST });
+    try {
+      const response = await axios.get(`${API_URL}/api/cart`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch({ type: GET_ALL_CART_REQUEST , payload : data});
+    } catch (error) {
+      dispatch({ type: GET_ALL_CART_REQUEST , payload : error });
+    }
+  };
+};

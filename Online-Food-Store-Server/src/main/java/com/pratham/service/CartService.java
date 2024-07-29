@@ -1,5 +1,7 @@
 package com.pratham.service;
 
+import java.util.List;
+
 import com.pratham.model.Cart;
 import com.pratham.model.CartItem;
 import com.pratham.request.AddCartItemRequest;
@@ -19,5 +21,7 @@ public interface CartService {
   public Cart findCartByUserId(String userId) throws Exception;
 
   public Cart clearCart(String userId) throws Exception;
+
+  public List<CartItem> getAllCartItem(String cartId) throws Exception;
 
 }

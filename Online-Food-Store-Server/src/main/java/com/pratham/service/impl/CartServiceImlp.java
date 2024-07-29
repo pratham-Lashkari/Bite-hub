@@ -1,5 +1,6 @@
 package com.pratham.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,5 +111,10 @@ public class CartServiceImlp implements CartService {
   @Override
   public Cart findCartByUserId(String userId) throws Exception {
     return cartRepository.findByCustomerId(userId);
+  }
+
+  @Override
+  public List<CartItem> getAllCartItem(String cartId) throws Exception {
+    return cartItemRepository.findByCartId(cartId);
   }
 }

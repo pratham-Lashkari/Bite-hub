@@ -1,5 +1,7 @@
 package com.pratham.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -65,6 +67,12 @@ public class CartController {
     User user = userService.findUserByJwtToken(jwt);
     Cart cart = cartService.findCartByUserId(user.getId());
     return new ResponseEntity<>(cart, HttpStatus.OK);
+  }
+
+  @GetMapping("/carts/{cartId}/items")
+  public ResponseEntity<List<CartItem>> getAllCartItems(@PathVariable String cartId) throws Exception {
+    List<CartItem> items = cartService.getAllCartItem(cartId);
+    return new ResponseEntity<>(items, HttpStatus.OK);
   }
 
 }
