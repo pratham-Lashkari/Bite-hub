@@ -1,8 +1,12 @@
 package com.pratham.config;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
@@ -12,10 +16,16 @@ import io.jsonwebtoken.Jwts;
 public class JwtProvider {
 
   public String generateToken(Authentication auth) {
+    // Collecting authorities from Authentication object
+    String authorities = auth.getAuthorities().stream()
+        .map(GrantedAuthority::getAuthority)
+        .collect(Collectors.joining(","));
+
     String jwt = Jwts.builder()
         .setIssuedAt(new Date())
-        .setExpiration(new Date(new Date().getTime() + 86400000))
+        .setExpiration(new Date(new Date().getTime() + 86400000)) // 1 day
         .claim("email", auth.getName())
+        .claim("authorities", authorities) // Add authorities to claims
         .signWith(JwtConstant.key)
         .compact();
     return jwt;
@@ -23,8 +33,22 @@ public class JwtProvider {
 
   public String getEmailFromToken(String token) {
     token = token.substring(7);
-    Claims claims = Jwts.parserBuilder().setSigningKey(JwtConstant.key).build().parseClaimsJws(token).getBody();
-    String email = String.valueOf(claims.get("email"));
-    return email;
+    Claims claims = Jwts.parserBuilder()
+        .setSigningKey(JwtConstant.key)
+        .build()
+        .parseClaimsJws(token)
+        .getBody();
+    return String.valueOf(claims.get("email"));
+  }
+
+  public Collection<GrantedAuthority> getAuthoritiesFromToken(String token) {
+    token = token.substring(7);
+    Claims claims = Jwts.parserBuilder()
+        .setSigningKey(JwtConstant.key)
+        .build()
+        .parseClaimsJws(token)
+        .getBody();
+    String authorities = String.valueOf(claims.get("authorities"));
+    return AuthorityUtils.commaSeparatedStringToAuthorityList(authorities);
   }
 }
