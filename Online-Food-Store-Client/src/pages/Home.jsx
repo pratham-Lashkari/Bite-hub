@@ -2,9 +2,19 @@ import React from "react";
 import "../styles/Home.scss";
 import MultiCarousel from "../Component/Carousels/MultiCarousel";
 import RestaurantCard from "../Component/Restaurant/RestaurantCard";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getAllRestaurantsAction } from "../store/Restaurant/Action";
 
-const restaurat = [1, 2, 3, 4, 5];
 const Home = () => {
+  const dispatch = useDispatch();
+  const { restaurant } = useSelector((store) => store);
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    dispatch(getAllRestaurantsAction(token));
+  }, []);
+
   return (
     <div className="">
       <section className="banner -z-50 relative flex flex-col justify-center items-center">
@@ -31,8 +41,8 @@ const Home = () => {
           Order For Our handpick Favourites
         </h1>
         <div className="flex flex-wrap items-center justify-around gap-5">
-          {restaurat.map((i) => (
-            <RestaurantCard key={i} />
+          {restaurant.restaurants.map((item, ind) => (
+            <RestaurantCard key={ind} item={item} />
           ))}
         </div>
       </section>

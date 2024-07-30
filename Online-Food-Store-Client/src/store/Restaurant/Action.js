@@ -14,9 +14,9 @@ import {
   GET_RESTAURANT_BY_ID_REQUEST,
   GET_RESTAURANT_BY_ID_SUCCESS,
   GET_RESTAURANT_BY_ID_FAILURE,
-  GET_RESTAURANT_BY_USER_ID_REQUEST,
-  GET_RESTAURANT_BY_USER_ID_SUCCESS,
-  GET_RESTAURANT_BY_USER_ID_FAILURE,
+  GET_RESTAURANTS_BY_USER_ID_REQUEST,
+  GET_RESTAURANTS_BY_USER_ID_SUCCESS,
+  GET_RESTAURANTS_BY_USER_ID_FAILURE,
   UPDATE_RESTAURANT_STATUS_REQUEST,
   UPDATE_RESTAURANT_STATUS_SUCCESS,
   UPDATE_RESTAURANT_STATUS_FAILURE,
@@ -47,12 +47,14 @@ export const getAllRestaurantsAction = (token) =>{
   return async (dispatch)=>{
     dispatch({type : GET_ALL_RESTAURANTS_REQUEST});
     try {
-      const {data} = await axios.get(`${API_URL}/api/restaurant`,{
+      const {data} = await axios.get(`${API_URL}/api/restaurant/all`,{
         headers :{
           "Content-Type" : "application/json",
            Authorization: `Bearer ${token}`
         }
       });
+      console.log("Data of restaurants: ", data);
+
       dispatch({type : GET_ALL_RESTAURANTS_SUCCESS , payload : data});
     } catch (error) {
       dispatch({type : GET_ALL_RESTAURANTS_FAILURE , payload : error})
@@ -79,7 +81,7 @@ export const getRestaurantById =(reqData)=>{
 
 export const getRestaurantByUserId =(token)=>{
   return async (dispatch)=>{
-    dispatch({type : GET_RESTAURANT_BY_USER_ID_REQUEST});
+    dispatch({type : GET_RESTAURANTS_BY_USER_ID_REQUEST});
     try {
       const {data} = await axios.get(`${API_URL}/api/admin/restaurants/user`,{
         headers :{
@@ -87,9 +89,9 @@ export const getRestaurantByUserId =(token)=>{
            Authorization: `Bearer ${token}`
         }
       });
-      dispatch({type : GET_RESTAURANT_BY_USER_ID_SUCCESS , payload : data});
+      dispatch({type : GET_RESTAURANTS_BY_USER_ID_SUCCESS , payload : data});
     } catch (error) {
-      dispatch({type : GET_RESTAURANT_BY_USER_ID_FAILURE , payload : error});
+      dispatch({type : GET_RESTAURANTS_BY_USER_ID_FAILURE , payload : error});
     }
   }
 }
