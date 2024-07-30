@@ -35,7 +35,7 @@ public class RestaurantController {
     return new ResponseEntity<>(restaurants, HttpStatus.OK);
   }
 
-  @GetMapping()
+  @GetMapping("/all")
   public ResponseEntity<List<Restaurant>> getAllRestaurant() throws Exception {
     List<Restaurant> restaurants = restaurantService.getAllRestaurant();
     return new ResponseEntity<>(restaurants, HttpStatus.OK);

@@ -19,7 +19,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityFilter {
 
   @Bean
-  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+  SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
     http.csrf(csrf -> csrf.disable());
     http.authorizeHttpRequests(request -> request
@@ -34,7 +34,7 @@ public class SecurityFilter {
   }
 
   @Bean
-  public CorsConfigurationSource corsConfigurationSource() {
+  CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
     configuration.setAllowedHeaders(Collections.singletonList("*"));
     configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
