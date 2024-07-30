@@ -19,7 +19,7 @@ public class Restaurant {
 
   @Id
   private String id;
-  private String OwnerId;
+  private String ownerId;
   private String name;
   private String cuisineType;
   private String description;

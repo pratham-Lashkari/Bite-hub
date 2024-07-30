@@ -18,7 +18,10 @@ import {
 import MenuCard from "./MenuCard";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getRestaurantById } from "../../store/Restaurant/Action";
+import {
+  getRestaurantById,
+  getRestaurantsCategory,
+} from "../../store/Restaurant/Action";
 
 const RestaurantDetails = () => {
   const [foodType, setFoodType] = useState("all");
@@ -33,8 +36,9 @@ const RestaurantDetails = () => {
   };
   useEffect(() => {
     dispatch(getRestaurantById({ token, restaurantId: id }));
+    dispatch(getRestaurantsCategory({ restaurantId: id, token }));
   }, []);
-  console.log("Restaruna by id is " + restaurant.restaurant);
+
   return (
     <div className="px-5 lg:px-20">
       <section>
@@ -119,12 +123,12 @@ const RestaurantDetails = () => {
                   name="food_type"
                   value={foodType || "all"}
                 >
-                  {categories.map((item, ind) => (
+                  {restaurant.categories.map((item, ind) => (
                     <FormControlLabel
                       key={ind}
-                      value={item}
+                      value={item.name}
                       control={<Radio />}
-                      label={item}
+                      label={item.name}
                     />
                   ))}
                 </RadioGroup>

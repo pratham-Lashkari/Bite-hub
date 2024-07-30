@@ -250,7 +250,7 @@ export const createCategoryAction =({reqData , token})=>{
 }
 
 
-export const getRestaurantsCategory =({restaurantId , token})=>{
+export const getRestaurantsCategory =({ restaurantId ,token})=>{
   return async (dispatch)=>{
     dispatch({type : GET_RESTAURANT_CATEGORY_REQUEST});
     try {

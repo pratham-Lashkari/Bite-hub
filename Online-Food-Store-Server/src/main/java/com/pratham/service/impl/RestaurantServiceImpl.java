@@ -92,11 +92,11 @@ public class RestaurantServiceImpl implements RestaurantService {
 
   @Override
   public Restaurant getRestaurantByUserId(String userId) throws Exception {
-    Restaurant restaurant = restaurantRepository.findByOwnerId(userId);
-    if (restaurant == null) {
+    Optional<Restaurant> restaurant = restaurantRepository.findByOwnerId(userId);
+    if (restaurant.isEmpty()) {
       throw new Exception("Restauant not found ");
     }
-    return restaurant;
+    return restaurant.get();
   }
 
   @Override
