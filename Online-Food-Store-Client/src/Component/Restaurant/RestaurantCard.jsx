@@ -3,9 +3,18 @@ import { IconButton } from "@mui/material";
 import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorite } from "../../store/Authentication/Action";
+import { isPresentInFavorites } from "../../constants/utils";
 const RestaurantCard = ({ item }) => {
-  console.log("Restaurant data " + item.name);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { auth } = useSelector((store) => store);
+  const token = localStorage.getItem("token");
+  const handleFaovrite = () => {
+    dispatch(addToFavorite(token, item.id));
+  };
   return (
     <Card className="w-[18rem]">
       <div
@@ -30,8 +39,12 @@ const RestaurantCard = ({ item }) => {
           <p className="text-gray-500 text-sm">{item.description}</p>
         </div>
         <div>
-          <IconButton>
-            {true ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+          <IconButton onClick={handleFaovrite}>
+            {isPresentInFavorites(auth.favorites, item) ? (
+              <FavoriteIcon />
+            ) : (
+              <FavoriteBorderIcon />
+            )}
           </IconButton>
         </div>
       </div>

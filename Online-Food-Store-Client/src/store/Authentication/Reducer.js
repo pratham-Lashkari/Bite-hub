@@ -1,3 +1,4 @@
+import { act } from "react";
 import { isPresentInFavorites } from "../../constants/utils";
 import {
   ADD_TO_FAVORITE_FAILURE,
@@ -43,6 +44,7 @@ export const authReducer = (state = intialState, action) => {
         ...state,
         isLoading: false,
         user: action.payload,
+        favorites : action.payload.favourites,
         error: null,
         success: true,
       };
