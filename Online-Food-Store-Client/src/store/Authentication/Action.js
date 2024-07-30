@@ -81,13 +81,16 @@ export const getUser = (token, navigate) => async (dispatch) => {
 };
 
 export const addToFavorite = (token , restaurantId) => async (dispatch) => {
+  console.log( "Token is " + token +  " Resturant id is " + restaurantId)
   dispatch({ type: ADD_TO_FAVORITE_REQUEST });
   try {
-    const { data } = await api.put(`/api/restaurant/${restaurantId}/add-favourites`,{
-      headers:{
-        Authorization : `Bearer ${token}`
+    const { data } = await axios.put(`${API_URL}/api/restaurant/${restaurantId}/add-favourites`,{},{
+      headers: {
+        "Content-Type" : "application/json",
+        Authorization: `Bearer ${token}`
       }
       });
+    console.log("DATA of favourites" + data)
     
     dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
   } catch (error) {

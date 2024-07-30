@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFavorite } from "../../store/Authentication/Action";
 import { isPresentInFavorites } from "../../constants/utils";
+
 const RestaurantCard = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,10 +16,13 @@ const RestaurantCard = ({ item }) => {
   const handleFaovrite = () => {
     dispatch(addToFavorite(token, item.id));
   };
+
   return (
     <Card className="w-[18rem]">
       <div
-        className={`${true ? "cursor-pointer" : "cursor-not-allowed"} relative`}
+        className={`${
+          item.open ? "cursor-pointer" : "cursor-not-allowed"
+        } relative`}
       >
         <img
           className="w-full h-[10rem] rounded-t-md object-cover"

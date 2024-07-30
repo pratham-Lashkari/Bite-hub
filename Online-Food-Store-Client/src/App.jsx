@@ -27,7 +27,7 @@ function App() {
       <CssBaseline />
       <NavBar />
       {/* <Home/> */}
-      {/* <RestaurantDetails/> */}
+      {/* <RestaurantDetails /> */}
       {/* <Cart/> */}
       <CustomRoutes />
       <Profile />

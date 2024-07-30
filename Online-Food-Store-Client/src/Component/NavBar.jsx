@@ -11,11 +11,11 @@ const NavBar = () => {
   const navigate = useNavigate();
   const { auth } = useSelector((store) => store);
   const handleAvatarClick = () => {
-    if (auth.user.role === "ROLE_CUSTOMER") {
-      navigate("/my-profile");
-    } else {
-      navigate("/admin/restaurant");
-    }
+    // if (auth.user.role === "ROLE_CUSTOMER") {
+    navigate("/my-profile");
+    // } else {
+    // navigate("/admin/restaurant");
+    // }/
   };
   return (
     <Box className="px-5 z-50 sticky top-0 py-[.8rem] bg-[#e91e63] lg:px-20 flex justify-between">
