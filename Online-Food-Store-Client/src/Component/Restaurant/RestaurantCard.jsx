@@ -17,6 +17,12 @@ const RestaurantCard = ({ item }) => {
     dispatch(addToFavorite(token, item.id));
   };
 
+  const handleNavigateToRestaurant = () => {
+    if (item.open) {
+      navigate(`/restaurant/${item.address.city}/${item.name}/${item.id}`);
+    }
+  };
+
   return (
     <Card className="w-[18rem]">
       <div
@@ -25,6 +31,7 @@ const RestaurantCard = ({ item }) => {
         } relative`}
       >
         <img
+          onClick={handleNavigateToRestaurant}
           className="w-full h-[10rem] rounded-t-md object-cover"
           src={item.images[0]}
           alt=""

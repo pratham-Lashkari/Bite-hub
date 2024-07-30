@@ -66,7 +66,7 @@ export const getRestaurantById =(reqData)=>{
     return async (dispatch)=>{
       dispatch({type : GET_RESTAURANT_BY_ID_REQUEST});
       try {
-        const {data} = await axios.get(`${API_URL}/api/restaurant/${reqData.id}`,{
+        const {data} = await axios.get(`${API_URL}/api/restaurant/${reqData.restaurantId}`,{
           headers :{
             "Content-Type" : "application/json",
              Authorization: `Bearer ${reqData.token}`

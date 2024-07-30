@@ -56,7 +56,6 @@ export const loginUser = (reqData) => async (dispatch) => {
 };
 
 export const getUser = (token, navigate) => async (dispatch) => {
-  console.log("Token is =  " + token)
   dispatch({ type: GET_USER_REQUEST });
   try {
     const { data } = await axios.get(`${API_URL}/users/profile`,{
@@ -66,7 +65,6 @@ export const getUser = (token, navigate) => async (dispatch) => {
       }
     });
     dispatch({ type: GET_USER_SUCCESS , payload : data });
-
     if (data.role === "ROLE_RESTAURANT_OWNER") {
       navigate("/admin/restaurant");
     } else {
@@ -89,9 +87,7 @@ export const addToFavorite = (token , restaurantId) => async (dispatch) => {
         "Content-Type" : "application/json",
         Authorization: `Bearer ${token}`
       }
-      });
-    console.log("DATA of favourites" + data)
-    
+      });    
     dispatch({ type: ADD_TO_FAVORITE_SUCCESS, payload: data });
   } catch (error) {
     dispatch({type : ADD_TO_FAVORITE_FAILURE , payload : error});
