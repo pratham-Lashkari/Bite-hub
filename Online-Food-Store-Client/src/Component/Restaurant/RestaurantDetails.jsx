@@ -28,7 +28,7 @@ const RestaurantDetails = () => {
   const [foodType, setFoodType] = useState("all");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { auth, restaurant } = useSelector((store) => store);
+  const { auth, restaurant, menu } = useSelector((store) => store);
   const token = localStorage.getItem("token");
   const { id, city } = useParams();
 
@@ -40,14 +40,15 @@ const RestaurantDetails = () => {
     dispatch(getRestaurantsCategory({ restaurantId: id, token }));
     dispatch(
       getMenuItemsByRestaurantId({
+        token: token,
         restaurantId: id,
         vegetarian: false,
-        nonveg: false,
+        // nonveg: false,
         seasonal: false,
+        // foodCategory: false,
       })
     );
   }, []);
-
   return (
     <div className="px-5 lg:px-20">
       <section>
@@ -146,8 +147,8 @@ const RestaurantDetails = () => {
           </div>
         </div>
         <div className="space-y-5 lg:w-[80%] lg:pl-10">
-          {menuCards.map((item, ind) => (
-            <MenuCard key={ind} />
+          {menu.menuItems.map((item, ind) => (
+            <MenuCard key={ind} item={item} />
           ))}
         </div>
       </section>

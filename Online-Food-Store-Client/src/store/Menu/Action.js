@@ -38,15 +38,22 @@ export const createMenuItem = ({ menu, token }) => {
   };
 };
 
+
 export const getMenuItemsByRestaurantId = (reqData) => {
   return async (dispatch) => {
     dispatch({ type: GET_MENU_ITEM_BY_RESTAURANT_ID_REQUEST });
     try {
       const { data } = await axios.get(
-        `${API_URL}/api/food/restaurant/${reqData.restaurantId}?vegetarian=${reqData.vegetarian}&nonveg=${reqData.nonveg}&seasonal=${reqData.seasonal}&food_category=${reqData.foodCategory}`,{
+        `${API_URL}/api/food/restaurant/${reqData.restaurantId}`, {
+          params: {
+            vegetarian: reqData.vegetarian,
+            nonveg: reqData.nonveg,
+            seasonal: reqData.seasonal,
+            food_category: reqData.foodCategory
+          },
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${reqData.token}`,
           },
         }
       );
@@ -59,6 +66,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
     }
   };
 };
+
 
 export const searchMenuItem = ({keyword , token}) => {
   return async (dispatch) => {
