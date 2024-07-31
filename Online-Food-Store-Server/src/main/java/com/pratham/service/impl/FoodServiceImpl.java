@@ -36,6 +36,7 @@ public class FoodServiceImpl implements FoodService {
     food.setPrice(req.getPrice());
     food.setIngredients(req.getIngredientsItem());
     food.setSeasonal(req.isSessional());
+    food.setAvailable(true);
 
     Food savedFood = foodRepository.save(food);
     restaurant.getFoods().add(food.getId());
