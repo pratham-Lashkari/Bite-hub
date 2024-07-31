@@ -6,6 +6,7 @@ import com.pratham.model.Category;
 import com.pratham.model.Food;
 import com.pratham.model.Restaurant;
 import com.pratham.request.CreateFoodRequest;
+import com.pratham.response.FoodReponse;
 
 public interface FoodService {
 
@@ -13,7 +14,7 @@ public interface FoodService {
 
   void deleteFood(String foodId) throws Exception;
 
-  public List<Food> getRestaurantFood(String restaurantId, boolean isVegitarain, boolean isSeasonal,
+  public List<FoodReponse> getRestaurantFood(String restaurantId, boolean isVegitarain, boolean isSeasonal,
       String foodCategory, boolean isNonveg);
 
   public List<Food> searchFood(String keyword);

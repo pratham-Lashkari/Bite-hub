@@ -1,5 +1,6 @@
 package com.pratham.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,6 +14,7 @@ import com.pratham.model.Restaurant;
 import com.pratham.repository.FoodRepository;
 import com.pratham.repository.RestaurantRepository;
 import com.pratham.request.CreateFoodRequest;
+import com.pratham.response.FoodReponse;
 import com.pratham.service.FoodService;
 
 @Service
@@ -52,7 +54,7 @@ public class FoodServiceImpl implements FoodService {
   }
 
   @Override
-  public List<Food> getRestaurantFood(String restaurantId, boolean isVegitarain, boolean isSeasonal,
+  public List<FoodReponse> getRestaurantFood(String restaurantId, boolean isVegitarain, boolean isSeasonal,
       String foodCategory, boolean isNonveg) {
     List<Food> foods = foodRepository.findByRestaurantId(restaurantId);
 
@@ -68,8 +70,8 @@ public class FoodServiceImpl implements FoodService {
     if (foodCategory != null) {
       foods = filterByFoodCategory(foodCategory, foods);
     }
-
-    return foods;
+    List<FoodReponse> foodRes = new ArrayList<>();
+    return foodRes;
   }
 
   private List<Food> filterByFoodCategory(String foodCategory, List<Food> foods) {
