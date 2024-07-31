@@ -67,6 +67,7 @@ public class FoodServiceImpl implements FoodService {
     if (foodCategory != null) {
       foods = filterByFoodCategory(foodCategory, foods);
     }
+
     return foods;
   }
 
