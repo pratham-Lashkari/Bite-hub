@@ -22,6 +22,7 @@ import {
   getRestaurantById,
   getRestaurantsCategory,
 } from "../../store/Restaurant/Action";
+import { getMenuItemsByRestaurantId } from "../../store/Menu/Action";
 
 const RestaurantDetails = () => {
   const [foodType, setFoodType] = useState("all");
@@ -37,6 +38,14 @@ const RestaurantDetails = () => {
   useEffect(() => {
     dispatch(getRestaurantById({ token, restaurantId: id }));
     dispatch(getRestaurantsCategory({ restaurantId: id, token }));
+    dispatch(
+      getMenuItemsByRestaurantId({
+        restaurantId: id,
+        vegetarian: false,
+        nonveg: false,
+        seasonal: false,
+      })
+    );
   }, []);
 
   return (
