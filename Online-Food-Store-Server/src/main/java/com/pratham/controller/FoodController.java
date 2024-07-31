@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pratham.model.Food;
+import com.pratham.response.FoodReponse;
 import com.pratham.service.FoodService;
 
 @RestController
@@ -29,14 +30,14 @@ public class FoodController {
   }
 
   @GetMapping("/restaurant/{restaurantId}")
-  public ResponseEntity<List<Food>> getRestaurantFood(
+  public ResponseEntity<List<FoodReponse>> getRestaurantFood(
       @RequestParam(required = false) boolean vegetarian,
       @RequestParam(required = false) boolean seasonal,
       @RequestParam(required = false) boolean nonveg,
       @RequestParam(required = false) String food_category,
       @PathVariable String restaurantId) throws Exception {
 
-    List<Food> foods = foodService.getRestaurantFood(restaurantId, vegetarian, seasonal, food_category, nonveg);
+    List<FoodReponse> foods = foodService.getRestaurantFood(restaurantId, vegetarian, seasonal, food_category, nonveg);
     return new ResponseEntity<>(foods, HttpStatus.OK);
   }
 }

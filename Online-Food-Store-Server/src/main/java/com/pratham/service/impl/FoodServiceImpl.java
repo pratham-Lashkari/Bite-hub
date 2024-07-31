@@ -10,8 +10,12 @@ import org.springframework.stereotype.Service;
 
 import com.pratham.model.Category;
 import com.pratham.model.Food;
+import com.pratham.model.IngredientCategoryModel;
+import com.pratham.model.IngredientsItem;
 import com.pratham.model.Restaurant;
 import com.pratham.repository.FoodRepository;
+import com.pratham.repository.IngredientCategroyRepository;
+import com.pratham.repository.IngredientItemRepository;
 import com.pratham.repository.RestaurantRepository;
 import com.pratham.request.CreateFoodRequest;
 import com.pratham.response.FoodReponse;
@@ -25,6 +29,12 @@ public class FoodServiceImpl implements FoodService {
 
   @Autowired
   private RestaurantRepository restaurantRepository;
+
+  @Autowired
+  private IngredientItemRepository ingredientItemRepository;
+
+  @Autowired
+  private IngredientCategroyRepository ingredientCategroyRepository;
 
   @Override
   public Food createFood(CreateFoodRequest req, Category category, Restaurant restaurant) {
@@ -71,6 +81,43 @@ public class FoodServiceImpl implements FoodService {
       foods = filterByFoodCategory(foodCategory, foods);
     }
     List<FoodReponse> foodRes = new ArrayList<>();
+
+    for (Food food : foods) {
+      List<IngredientsItem> ingredients = new ArrayList<>();
+      List<IngredientCategoryModel> ingredientCategoryModels = new ArrayList<>();
+
+      for (String ingredientId : food.getIngredients()) {
+        IngredientsItem ingredient = ingredientItemRepository.findById(ingredientId)
+            .orElseThrow(() -> new RuntimeException("Ingredient not found: " + ingredientId));
+        ingredients.add(ingredient);
+        IngredientCategoryModel category = ingredientCategroyRepository.findById(ingredient.getIngredientCategoryId())
+            .orElseThrow(
+                () -> new RuntimeException("Ingredient category not found: " + ingredient.getIngredientCategoryId()));
+
+        if (!ingredientCategoryModels.contains(category)) {
+          ingredientCategoryModels.add(category);
+        }
+
+      }
+
+      FoodReponse foodReponse = new FoodReponse(
+          food.getId(),
+          food.getName(),
+          food.getDescription(),
+          food.getPrice(),
+          food.getFoodCategory(),
+          food.getImages(),
+          food.isAvailable(),
+          food.getRestaurantId(),
+          food.isSeasonal(),
+          food.isVegetarian(),
+          ingredients,
+          ingredientCategoryModels,
+          food.getCreatedAt() != null ? food.getCreatedAt().toString() : null);
+
+      foodRes.add(foodReponse);
+    }
+
     return foodRes;
   }
 
