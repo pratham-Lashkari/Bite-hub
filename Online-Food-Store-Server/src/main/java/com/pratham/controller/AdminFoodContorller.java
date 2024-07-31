@@ -34,7 +34,7 @@ public class AdminFoodContorller {
       @RequestHeader("Authorization") String jwt) throws Exception {
 
     Restaurant restaurant = restaurantService.findRestaurantById(req.getRestaurantId());
-    Food food = foodService.createFood(req, req.getCategoryId(), restaurant);
+    Food food = foodService.createFood(req, req.getCategory(), restaurant);
     return new ResponseEntity<>(food, HttpStatus.CREATED);
   }
 

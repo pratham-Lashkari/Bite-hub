@@ -13,7 +13,7 @@ public class CreateFoodRequest {
   private String description;
   private Long price;
 
-  private Category categoryId;
+  private Category category;
   private List<String> images;
   private String restaurantId;
   private boolean vegetarin;
