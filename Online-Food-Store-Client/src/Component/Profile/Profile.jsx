@@ -12,7 +12,7 @@ const Profile = () => {
   return (
     <div className="lg:flex justify-between">
       <div className="sticky h-[3vh] lg:w-[20%]">
-       { location.pathname.startsWith("/my-profile") && <ProfileNavigation />}
+        {location.pathname.startsWith("/my-profile") && <ProfileNavigation />}
       </div>
       <div className="lg:w-[80%]">
         <Routes>

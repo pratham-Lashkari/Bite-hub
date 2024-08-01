@@ -1,18 +1,14 @@
-import "./App.css";
 import { ThemeProvider } from "@mui/material";
-import { darkTheme } from "./Theme/DarkTheme";
-import NavBar from "./Component/NavBar";
 import CssBaseline from "@mui/material/CssBaseline";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
-import Home from "./pages/Home";
-import RestaurantDetails from "./Component/Restaurant/RestaurantDetails";
-import Cart from "./Component/Cart/Cart";
+import NavBar from "./Component/NavBar";
 import Profile from "./Component/Profile/Profile";
 import CustomRoutes from "./Component/Routes/CustomRoutes";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import { getUser } from "./store/Authentication/Action";
-import { useNavigate } from "react-router-dom";
+import { darkTheme } from "./Theme/DarkTheme";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,9 +23,6 @@ function App() {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <NavBar />
-      {/* <Home/> */}
-      {/* <RestaurantDetails /> */}
-      {/* <Cart/> */}
       <CustomRoutes />
       <Profile />
     </ThemeProvider>
