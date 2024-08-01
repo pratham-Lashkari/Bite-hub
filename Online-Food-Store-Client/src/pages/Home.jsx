@@ -8,7 +8,7 @@ import { getAllRestaurantsAction } from "../store/Restaurant/Action";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { restaurant } = useSelector((store) => store);
+  const restaurant = useSelector((store) => store.restaurant);
   const token = localStorage.getItem("token");
 
   useEffect(() => {

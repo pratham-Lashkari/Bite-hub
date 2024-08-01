@@ -31,11 +31,9 @@ const RestaurantDetails = () => {
   const token = localStorage.getItem("token");
   const { id, city } = useParams();
 
-  const { auth, restaurant, menu } = useSelector((store) => ({
-    auth: store.auth,
-    restaurant: store.restaurant,
-    menu: store.menu,
-  }));
+  // const auth = useSelector((store) => store.auth);
+  const restaurant = useSelector((store) => store.restaurant);
+  const menu = useSelector((store) => store.menu);
 
   const handleFilter = (e) => {
     console.log("value is: " + e.target.value);

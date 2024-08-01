@@ -16,7 +16,7 @@ import { getUser } from "./store/Authentication/Action";
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  const { auth } = useSelector((store) => store);
+  const auth = useSelector((store) => store.auth);
   // console.log("app ,jsx " + auth.user.fullName);
   useEffect(() => {
     dispatch(getUser(auth.token || token));
