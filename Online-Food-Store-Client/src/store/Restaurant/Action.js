@@ -53,7 +53,6 @@ export const getAllRestaurantsAction = (token) =>{
            Authorization: `Bearer ${token}`
         }
       });
-      console.log("Data of restaurants: ", data);
 
       dispatch({type : GET_ALL_RESTAURANTS_SUCCESS , payload : data});
     } catch (error) {
