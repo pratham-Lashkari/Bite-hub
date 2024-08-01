@@ -47,9 +47,9 @@ const RestaurantDetails = () => {
       getMenuItemsByRestaurantId({
         token: token,
         restaurantId: id,
-        vegetarian: false,
+        vegetarian: foodType === "vegetarain" ? true : false,
         // nonveg: false,
-        seasonal: false,
+        seasonal: foodType === "seasonal" ? true : false,
         foodCategory: selectedCategory,
       })
     );
