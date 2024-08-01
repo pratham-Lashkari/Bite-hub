@@ -9,7 +9,8 @@ import { useSelector } from "react-redux";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const { auth } = useSelector((store) => store);
+  const auth = useSelector((store) => store.auth);
+
   const handleAvatarClick = () => {
     // if (auth.user.role === "ROLE_CUSTOMER") {
     navigate("/my-profile");

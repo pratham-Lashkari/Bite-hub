@@ -28,9 +28,14 @@ const RestaurantDetails = () => {
   const [foodType, setFoodType] = useState("all");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { auth, restaurant, menu } = useSelector((store) => store);
   const token = localStorage.getItem("token");
   const { id, city } = useParams();
+
+  const { auth, restaurant, menu } = useSelector((store) => ({
+    auth: store.auth,
+    restaurant: store.restaurant,
+    menu: store.menu,
+  }));
 
   const handleFilter = (e) => {
     console.log("value is: " + e.target.value);

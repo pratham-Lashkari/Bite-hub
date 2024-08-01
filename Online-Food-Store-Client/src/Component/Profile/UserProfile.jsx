@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/Authentication/Action";
 
 const UserProfile = () => {
-  const { auth } = useSelector((store) => store);
+  const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(logout());

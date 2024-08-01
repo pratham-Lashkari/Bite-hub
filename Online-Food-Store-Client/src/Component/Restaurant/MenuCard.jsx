@@ -1,3 +1,4 @@
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
   Accordion,
   AccordionDetails,
@@ -8,8 +9,7 @@ import {
   FormGroup,
 } from "@mui/material";
 import React from "react";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { menuCardIngredients } from "../../constants/RestaurantDetailsFilter";
+import { organizeIngredients } from "../../utils/ingredeint&itsCategory";
 
 const MenuCard = ({ item }) => {
   const handleChangeCheckBox = (value) => {
@@ -40,20 +40,25 @@ const MenuCard = ({ item }) => {
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          <from>
+          <form>
             <div className="flex gap-5 flex-wrap">
-              {menuCardIngredients.map((item, ind) => (
+              {organizeIngredients(
+                item.ingredientCategoryModels,
+                item.ingredients
+              ).map((item, ind) => (
                 <FormGroup key={ind}>
-                  <p>{item.category}</p>
+                  <p>{item.name}</p>
                   {item.ingredients.map((ingredients, i) => (
                     <FormControlLabel
                       key={i}
                       control={
                         <Checkbox
-                          onChange={() => handleChangeCheckBox(ingredients)}
+                          onChange={() =>
+                            handleChangeCheckBox(ingredients.name)
+                          }
                         />
                       }
-                      label={ingredients}
+                      label={ingredients.name}
                     />
                   ))}
                 </FormGroup>
@@ -64,7 +69,7 @@ const MenuCard = ({ item }) => {
                 {true ? "Add to Card" : "Out Of Stock"}
               </Button>
             </div>
-          </from>
+          </form>
         </AccordionDetails>
       </Accordion>
     </div>

@@ -11,7 +11,7 @@ import { isPresentInFavorites } from "../../constants/utils";
 const RestaurantCard = ({ item }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { auth } = useSelector((store) => store);
+  const auth = useSelector((store) => store.auth);
   const token = localStorage.getItem("token");
   const handleFaovrite = () => {
     dispatch(addToFavorite(token, item.id));
