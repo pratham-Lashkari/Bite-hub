@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import {
   Divider,
   FormControl,
@@ -8,28 +9,22 @@ import {
   RadioGroup,
   Typography,
 } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
-import {
-  categories,
-  foodTypes,
-  menuCards,
-} from "../../constants/RestaurantDetailsFilter";
-import MenuCard from "./MenuCard";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { foodTypes } from "../../constants/RestaurantDetailsFilter";
+import { getMenuItemsByRestaurantId } from "../../store/Menu/Action";
 import {
   getRestaurantById,
   getRestaurantsCategory,
 } from "../../store/Restaurant/Action";
-import { getMenuItemsByRestaurantId } from "../../store/Menu/Action";
+import MenuCard from "./MenuCard";
 
 const RestaurantDetails = () => {
   const [foodType, setFoodType] = useState("all");
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  const { id, city } = useParams();
+  const { id } = useParams();
   const [selectedCategory, setSelectedCategory] = useState();
 
   // const auth = useSelector((store) => store.auth);
@@ -37,7 +32,10 @@ const RestaurantDetails = () => {
   const menu = useSelector((store) => store.menu);
 
   const handleFilter = (e) => {
-    console.log("value is: " + e.target.value);
+    setFoodType(e.target.value);
+  };
+  const handleFilterCategory = (e) => {
+    setSelectedCategory(e.target.value);
   };
   useEffect(() => {
     dispatch(getRestaurantById({ token, restaurantId: id }));
@@ -52,10 +50,10 @@ const RestaurantDetails = () => {
         vegetarian: false,
         // nonveg: false,
         seasonal: false,
-        foodCategory: selectedState,
+        foodCategory: selectedCategory,
       })
     );
-  }, [selectedState]);
+  }, [selectedCategory]);
   return (
     <div className="px-5 lg:px-20">
       <section>
@@ -136,9 +134,9 @@ const RestaurantDetails = () => {
               </Typography>
               <FormControl className="py-10 space-y-5" component={"fieldset"}>
                 <RadioGroup
-                  onChange={handleFilter}
+                  onChange={handleFilterCategory}
                   name="food_type"
-                  value={foodType || "all"}
+                  value={selectedCategory || "all"}
                 >
                   {restaurant.categories.map((item, ind) => (
                     <FormControlLabel
