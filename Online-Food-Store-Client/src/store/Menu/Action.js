@@ -57,7 +57,7 @@ export const getMenuItemsByRestaurantId = (reqData) => {
           },
         }
       );
-      console.log("Data is = " + data)
+      console.log("Data is = " + data[0].ingredientCategoryModels[0].name)
       dispatch({ type: GET_MENU_ITEM_BY_RESTAURANT_ID_SUCCESS, payload: data });
     } catch (error) {
       dispatch({
