@@ -30,6 +30,7 @@ const RestaurantDetails = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const { id, city } = useParams();
+  const [selectedCategory, setSelectedCategory] = useState();
 
   // const auth = useSelector((store) => store.auth);
   const restaurant = useSelector((store) => store.restaurant);
@@ -41,6 +42,9 @@ const RestaurantDetails = () => {
   useEffect(() => {
     dispatch(getRestaurantById({ token, restaurantId: id }));
     dispatch(getRestaurantsCategory({ restaurantId: id, token }));
+  }, []);
+
+  useEffect(() => {
     dispatch(
       getMenuItemsByRestaurantId({
         token: token,
@@ -48,10 +52,10 @@ const RestaurantDetails = () => {
         vegetarian: false,
         // nonveg: false,
         seasonal: false,
-        // foodCategory: false,
+        foodCategory: selectedState,
       })
     );
-  }, []);
+  }, [selectedState]);
   return (
     <div className="px-5 lg:px-20">
       <section>
