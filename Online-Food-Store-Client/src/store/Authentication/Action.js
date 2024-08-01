@@ -1,19 +1,19 @@
+import axios from "axios";
+import { API_URL } from "../../constants/api";
 import {
-  REGISTER_REQUEST,
-  REGISTER_SUCCESS,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
+  ADD_TO_FAVORITE_FAILURE,
   ADD_TO_FAVORITE_REQUEST,
   ADD_TO_FAVORITE_SUCCESS,
+  GET_USER_FAILURE,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
   LOGOUT,
   REGISTER_FAILURE,
-  GET_USER_FAILURE,
-  ADD_TO_FAVORITE_FAILURE
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS
 } from "./ActionTypes";
-import axios from "axios";
-import { api, API_URL } from "../../constants/api";
 
 export const registerUser = (reqData) => async (dispatch) => {
   dispatch({ type: REGISTER_REQUEST });

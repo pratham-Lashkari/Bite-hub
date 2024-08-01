@@ -12,14 +12,15 @@ import CustomRoutes from "./Component/Routes/CustomRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/Authentication/Action";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const auth = useSelector((store) => store.auth);
-  // console.log("app ,jsx " + auth.user.fullName);
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(getUser(auth.token || token));
+    dispatch(getUser(auth.token || token, navigate));
   }, [auth.token]);
 
   return (
