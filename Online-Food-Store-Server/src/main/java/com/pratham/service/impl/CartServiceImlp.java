@@ -36,11 +36,13 @@ public class CartServiceImlp implements CartService {
   public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
     User user = userService.findUserByJwtToken(jwt);
     Cart cart = cartRepository.findByCustomerId(user.getId());
-
-    for (CartItem cartItem : cart.getCartItems()) {
-      if (cartItem.getFoodId().equals(req.getFoodId())) {
-        int newQuantity = cartItem.getQuantity() + req.getQuantity();
-        return updateCartItemQuantity(cartItem.getId(), newQuantity);
+    System.out.println("Cart is " + cart);
+    if (cart.getCartItems() != null) {
+      for (CartItem cartItem : cart.getCartItems()) {
+        if (cartItem.getFoodId().equals(req.getFoodId())) {
+          int newQuantity = cartItem.getQuantity() + req.getQuantity();
+          return updateCartItemQuantity(cartItem.getId(), newQuantity);
+        }
       }
     }
     CartItem newCartItem = new CartItem();
