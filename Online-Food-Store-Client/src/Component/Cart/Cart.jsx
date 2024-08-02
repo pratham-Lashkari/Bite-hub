@@ -12,7 +12,7 @@ import CartItem from "./CartItem";
 import AddressCard from "./AddressCard";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { ErrorMessage, Field, Formik, Form } from "formik";
-
+import { useSelector } from "react-redux";
 
 export const style = {
   position: "absolute",
@@ -28,6 +28,7 @@ export const style = {
 
 const Cart = () => {
   const [open, setopen] = useState(false);
+  const cart = useSelector((store) => store.cart);
   const initialValues = {
     streetAddress: "",
     state: "",
@@ -39,13 +40,13 @@ const Cart = () => {
   const handleOpenAddressModal = () => setopen(true);
   const handleClose = () => setopen(false);
   const handleSubmit = (values) => console.log(values);
-
+  console.log("Cart items is " + cart.cartItems[0]?.id);
   return (
     <>
       <main className="lg:flex justify-between">
         <section className="lg:w-[30%] space-y-6 lg:min-h-screen pt-10">
-          {[1, 2].map((ind) => (
-            <CartItem key={ind} />
+          {cart.cartItems?.map((item, ind) => (
+            <CartItem key={ind} item={item} />
           ))}
           <Divider />
           <div className="billdetails px-5 text-sm">
@@ -78,7 +79,7 @@ const Cart = () => {
               Choose Delivery Address
             </h1>
             <div className="flex gap-5 flex-wrap justify-center">
-              {[1, 2, 3].map((item,ind) => (
+              {[1, 2, 3].map((item, ind) => (
                 <AddressCard
                   key={ind}
                   item={item}

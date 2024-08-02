@@ -3,7 +3,7 @@ import React from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const CartItem = () => {
+const CartItem = ({ item }) => {
   return (
     <div className="px-5">
       <div className="lg:flex items-center lg:space-x-5">
@@ -16,7 +16,7 @@ const CartItem = () => {
         </div>
         <div className="flex items-center justify-between lg:w-[70%]">
           <div className="space-y-1 lg:space-y-3 w-full">
-            <p>Pizza</p>
+            <p>pizza</p>
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-1">
                 <IconButton>
@@ -31,11 +31,11 @@ const CartItem = () => {
               </div>
             </div>
           </div>
-          <p>₹1499</p>
+          <p>₹{item?.totalPrice}</p>
         </div>
       </div>
       <div className="pt-3 space-x-2">
-        {[1,2].map((item, ind) => (
+        {[1, 2].map((item, ind) => (
           <Chip key={ind} label={"bread"} />
         ))}
       </div>

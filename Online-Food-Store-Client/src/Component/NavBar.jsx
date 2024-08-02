@@ -50,7 +50,7 @@ const NavBar = () => {
           )}
         </div>
         <div className="">
-          <IconButton>
+          <IconButton onClick={() => navigate("/cart")}>
             <Badge color="secondary" badgeContent={cart?.cartItems.length}>
               <ShoppingCartIcon sx={{ fontSize: "1.5rem" }}></ShoppingCartIcon>
             </Badge>
