@@ -36,13 +36,11 @@ public class CartServiceImlp implements CartService {
   public CartItem addItemToCart(AddCartItemRequest req, String jwt) throws Exception {
     User user = userService.findUserByJwtToken(jwt);
     Cart cart = cartRepository.findByCustomerId(user.getId());
-    System.out.println("Cart is " + cart);
     for (CartItem cartItem : cart.getCartItems()) {
       System.out.println("Cart is upading" + cart);
 
       if (cartItem.getFoodId().equals(req.getFoodId())) {
         int newQuantity = cartItem.getQuantity() + req.getQuantity();
-        System.out.println("Cart is updated" + cart);
         return updateCartItemQuantity(cartItem.getId(), newQuantity);
       }
 
@@ -54,7 +52,7 @@ public class CartServiceImlp implements CartService {
     newCartItem.setQuantity(req.getQuantity());
     newCartItem.setIngredients(req.getIngredients());
     newCartItem.setTotalPrice(req.getTotalPrice());
-
+    cart.setTotal(req.getTotalPrice());
     CartItem savCartItem = cartItemRepository.save(newCartItem);
     cart.getCartItems().add(savCartItem);
     cartRepository.save(cart);
@@ -79,6 +77,8 @@ public class CartServiceImlp implements CartService {
         items.setQuantity(quantity);
         items.setTotalPrice(food.getPrice() * quantity);
       }
+      Long price = cart.getTotal();
+      cart.setTotal((price + items.getTotalPrice()));
     }
     cartRepository.save(cart);
     return item;
