@@ -8,13 +8,32 @@ import {
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { organizeIngredients } from "../../utils/ingredeint&itsCategory";
 
 const MenuCard = ({ item }) => {
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
+
   const handleChangeCheckBox = (value) => {
-    console.log(value);
+    if (selectedIngredients.includes(value)) {
+      setSelectedIngredients(
+        selectedIngredients.filter((items) => items !== value)
+      );
+    } else {
+      selectedIngredients([...selectedIngredients, value]);
+    }
   };
+  const handleAddItemToCart = () => {
+    const reqData = {
+      token: localStorage.getItem("jwt"),
+      cartItem: {
+        menuItemId: item.id,
+        quantity: 1,
+        ingredients: selectedIngredients,
+      },
+    };
+  };
+
   return (
     <div>
       {" "}
