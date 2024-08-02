@@ -37,14 +37,17 @@ public class CartServiceImlp implements CartService {
     User user = userService.findUserByJwtToken(jwt);
     Cart cart = cartRepository.findByCustomerId(user.getId());
     System.out.println("Cart is " + cart);
-    if (cart.getCartItems() != null) {
-      for (CartItem cartItem : cart.getCartItems()) {
-        if (cartItem.getFoodId().equals(req.getFoodId())) {
-          int newQuantity = cartItem.getQuantity() + req.getQuantity();
-          return updateCartItemQuantity(cartItem.getId(), newQuantity);
-        }
+    for (CartItem cartItem : cart.getCartItems()) {
+      System.out.println("Cart is upading" + cart);
+
+      if (cartItem.getFoodId().equals(req.getFoodId())) {
+        int newQuantity = cartItem.getQuantity() + req.getQuantity();
+        System.out.println("Cart is updated" + cart);
+        return updateCartItemQuantity(cartItem.getId(), newQuantity);
       }
+
     }
+
     CartItem newCartItem = new CartItem();
     newCartItem.setFoodId(req.getFoodId());
     newCartItem.setCartId(cart.getId());
@@ -68,7 +71,17 @@ public class CartServiceImlp implements CartService {
     item.setQuantity(quantity);
     Food food = foodService.findFoodById(item.getFoodId());
     item.setTotalPrice(food.getPrice() * quantity);
-    return null;
+    cartItemRepository.save(item);
+
+    Cart cart = findCartById(item.getCartId());
+    for (CartItem items : cart.getCartItems()) {
+      if (items.getCartId().equals(cart.getId())) {
+        items.setQuantity(quantity);
+        items.setTotalPrice(food.getPrice() * quantity);
+      }
+    }
+    cartRepository.save(cart);
+    return item;
   }
 
   @Override
