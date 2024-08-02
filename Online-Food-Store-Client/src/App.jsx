@@ -9,6 +9,7 @@ import Profile from "./Component/Profile/Profile";
 import CustomRoutes from "./Component/Routes/CustomRoutes";
 import { getUser } from "./store/Authentication/Action";
 import { darkTheme } from "./Theme/DarkTheme";
+import { findCart } from "./store/Cart/Action";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ function App() {
   const navigate = useNavigate();
   useEffect(() => {
     dispatch(getUser(auth.token || token, navigate));
+    dispatch(findCart(token));
   }, [auth.token]);
-
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />

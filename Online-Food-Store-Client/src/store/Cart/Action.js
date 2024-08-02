@@ -32,6 +32,7 @@ export const findCart = (token) => {
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("Cart is " + data.total)
       dispatch({ type: FIND_CART_SUCCESS , payload : data });
     } catch (error) {
       dispatch({ type: FIND_CART_FAILURE , payload : error });

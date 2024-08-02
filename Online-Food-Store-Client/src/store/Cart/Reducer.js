@@ -25,7 +25,8 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        cart: action.payload.items,
+        cart: action.payload,
+        cartItems : action.payload.cartItems,
         error: null
       };
 
