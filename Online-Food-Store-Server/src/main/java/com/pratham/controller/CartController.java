@@ -20,6 +20,7 @@ import com.pratham.model.CartItem;
 import com.pratham.model.User;
 import com.pratham.request.AddCartItemRequest;
 import com.pratham.request.UpdateCartItemRequest;
+import com.pratham.response.CartResponse;
 import com.pratham.service.CartService;
 import com.pratham.service.UserService;
 
@@ -63,9 +64,9 @@ public class CartController {
   }
 
   @GetMapping("/cart")
-  public ResponseEntity<Cart> findUserCart(@RequestHeader("Authorization") String jwt) throws Exception {
+  public ResponseEntity<CartResponse> findUserCart(@RequestHeader("Authorization") String jwt) throws Exception {
     User user = userService.findUserByJwtToken(jwt);
-    Cart cart = cartService.findCartByUserId(user.getId());
+    CartResponse cart = cartService.findCartByUserId(user.getId());
     return new ResponseEntity<>(cart, HttpStatus.OK);
   }
 

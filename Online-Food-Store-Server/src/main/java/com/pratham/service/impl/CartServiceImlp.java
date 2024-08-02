@@ -1,5 +1,6 @@
 package com.pratham.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +14,8 @@ import com.pratham.model.User;
 import com.pratham.repository.CartItemRepository;
 import com.pratham.repository.CartRepository;
 import com.pratham.request.AddCartItemRequest;
+import com.pratham.response.CartItemResponse;
+import com.pratham.response.CartResponse;
 import com.pratham.service.CartService;
 import com.pratham.service.FoodService;
 import com.pratham.service.UserService;
@@ -118,14 +121,33 @@ public class CartServiceImlp implements CartService {
 
   @Override
   public Cart clearCart(String userId) throws Exception {
-    Cart cart = findCartByUserId(userId);
+    Cart cart = cartRepository.findByCustomerId(userId);
     cart.getCartItems().clear();
     return cartRepository.save(cart);
   }
 
   @Override
-  public Cart findCartByUserId(String userId) throws Exception {
-    return cartRepository.findByCustomerId(userId);
+  public CartResponse findCartByUserId(String userId) throws Exception {
+    Cart cart = cartRepository.findByCustomerId(userId);
+    CartResponse cartResponse = new CartResponse();
+    cartResponse.setId(cart.getId());
+    cartResponse.setCustomerId(cart.getCustomerId());
+    cartResponse.setTotal(cart.getTotal());
+    List<CartItemResponse> cartItemResponses = new ArrayList<>();
+    for (CartItem cartItem : cart.getCartItems()) {
+      CartItemResponse cartItemResponse = new CartItemResponse();
+      Food food = foodService.findFoodById(cartItem.getFoodId());
+      String name = food.getName();
+      List<String> image = food.getImages();
+      cartItemResponse.setId(cartItem.getId());
+      cartItemResponse.setName(name);
+      cartItemResponse.setImages(image);
+      cartItemResponse.setQuantity(cartItem.getQuantity());
+      cartItemResponse.setTotalPrice(cartItem.getTotalPrice());
+      cartItemResponses.add(cartItemResponse);
+    }
+    cartResponse.setCartItems(cartItemResponses);
+    return cartResponse;
   }
 
   @Override

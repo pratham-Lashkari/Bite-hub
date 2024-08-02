@@ -17,6 +17,7 @@ import com.pratham.model.OrderItem;
 import com.pratham.model.Restaurant;
 import com.pratham.model.User;
 import com.pratham.repository.AddressRepository;
+import com.pratham.repository.CartRepository;
 import com.pratham.repository.OrderItemRepository;
 import com.pratham.repository.OrderRepository;
 import com.pratham.repository.RestaurantRepository;
@@ -50,6 +51,9 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   private RestaurantRepository restaurantRepository;
 
+  @Autowired
+  private CartRepository cartRepository;
+
   @Override
   public Order createOrder(OrderRequest order, User user) throws Exception {
 
@@ -69,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
     creatOrder.setOrderStatus("PENDING");
     creatOrder.setRestaurantId(restaurant.getId());
 
-    Cart cart = cartService.findCartByUserId(user.getId());
+    Cart cart = cartRepository.findByCustomerId(user.getId());
     List<String> orderItems = new ArrayList<>();
 
     for (CartItem cartItem : cart.getCartItems()) {

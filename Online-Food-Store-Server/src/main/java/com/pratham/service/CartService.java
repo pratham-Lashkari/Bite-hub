@@ -5,6 +5,7 @@ import java.util.List;
 import com.pratham.model.Cart;
 import com.pratham.model.CartItem;
 import com.pratham.request.AddCartItemRequest;
+import com.pratham.response.CartResponse;
 
 public interface CartService {
 
@@ -18,7 +19,7 @@ public interface CartService {
 
   public Cart findCartById(String id) throws Exception;
 
-  public Cart findCartByUserId(String userId) throws Exception;
+  public CartResponse findCartByUserId(String userId) throws Exception;
 
   public Cart clearCart(String userId) throws Exception;
 
