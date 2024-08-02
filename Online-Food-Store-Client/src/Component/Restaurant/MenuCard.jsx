@@ -20,18 +20,21 @@ const MenuCard = ({ item }) => {
         selectedIngredients.filter((items) => items !== value)
       );
     } else {
-      selectedIngredients([...selectedIngredients, value]);
+      setSelectedIngredients([...selectedIngredients, value]);
     }
   };
-  const handleAddItemToCart = () => {
+  const handleAddItemToCart = (e) => {
+    e.preventDefault();
+
     const reqData = {
-      token: localStorage.getItem("jwt"),
+      token: localStorage.getItem("token"),
       cartItem: {
         menuItemId: item.id,
         quantity: 1,
         ingredients: selectedIngredients,
       },
     };
+    console.log(reqData);
   };
 
   return (
@@ -59,7 +62,7 @@ const MenuCard = ({ item }) => {
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          <form>
+          <form onSubmit={handleAddItemToCart}>
             <div className="flex gap-5 flex-wrap">
               {organizeIngredients(
                 item.ingredientCategoryModels,
@@ -72,9 +75,7 @@ const MenuCard = ({ item }) => {
                       key={i}
                       control={
                         <Checkbox
-                          onChange={() =>
-                            handleChangeCheckBox(ingredients.name)
-                          }
+                          onChange={() => handleChangeCheckBox(ingredients.id)}
                         />
                       }
                       label={ingredients.name}
