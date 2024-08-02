@@ -10,10 +10,12 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import { organizeIngredients } from "../../utils/ingredeint&itsCategory";
+import { useDispatch } from "react-redux";
+import { addItemToCart } from "../../store/Cart/Action";
 
 const MenuCard = ({ item }) => {
   const [selectedIngredients, setSelectedIngredients] = useState([]);
-
+  const dispatch = useDispatch();
   const handleChangeCheckBox = (value) => {
     if (selectedIngredients.includes(value)) {
       setSelectedIngredients(
@@ -29,11 +31,13 @@ const MenuCard = ({ item }) => {
     const reqData = {
       token: localStorage.getItem("token"),
       cartItem: {
-        menuItemId: item.id,
+        foodId: item.id,
         quantity: 1,
         ingredients: selectedIngredients,
+        totalPrice: item.price,
       },
     };
+    dispatch(addItemToCart(reqData));
     console.log(reqData);
   };
 
