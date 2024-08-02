@@ -63,7 +63,7 @@ export const addItemToCart = (reqData) => {
       const {data} = await axios.post(`${API_URL}/api/cart/add`, reqData.cartItem,{
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${reqData.token}`,
         },
       });
       dispatch({ type: ADD_ITEM_TO_CART_SUCCESS, payload : data});
