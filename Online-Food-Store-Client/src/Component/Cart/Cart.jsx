@@ -57,17 +57,17 @@ const Cart = () => {
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Deliver Fee</p>
-                <p>₹344</p>
+                <p>₹33</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>GST and Restaurant Charges</p>
-                <p>₹344</p>
+                <p>₹21</p>
               </div>
               <Divider />
             </div>
             <div className="flex justify-between">
               <p>Total pay</p>
-              <p>₹344</p>
+              <p>₹{cart?.cart?.total + 21 + 33}</p>
             </div>
           </div>
         </section>
