@@ -32,7 +32,6 @@ export const findCart = (token) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log("Cart is " + data.total)
       dispatch({ type: FIND_CART_SUCCESS , payload : data });
     } catch (error) {
       dispatch({ type: FIND_CART_FAILURE , payload : error });
@@ -74,16 +73,19 @@ export const addItemToCart = (reqData) => {
   };
 };
 
-export const updateCartItem = (reqData) => {
+export const updateCartItem = (reqData , token) => {
   return async (dispatch) => {
+    console.log("Update Cart ID is Is =  " + reqData.cartItemId)
+    console.log("Update Cart quantity is =  " + reqData.quantity)
     dispatch({ type: UPDATE_CART_REQUEST });
     try {
-      const {data} = await axios.put(`${API_URL}/api/cart-item/update`, reqData.data,{
+      const {data} = await axios.put(`${API_URL}/api/cart-item/update`, reqData,{
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
+      console.log("Update Cart Is =  " + data)
       dispatch({ type: UPDATE_CART_SUCCESS, payload : data});
     } catch (error) {
       dispatch({ type: UPDATE_CART_FAILURE , payload : error });
@@ -95,7 +97,7 @@ export const removeCartItem = ({cartItemId , token}) => {
   return async (dispatch) => {
     dispatch({ type: REMOVE_CART_ITEM_REQUEST });
     try {
-      const {data} = await axios.delete(`${API_URL}/api/cart-item/{id}/remove`,{
+      const {data} = await axios.delete(`${API_URL}/api/cart-item/{cartItemId}/remove`,{
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

@@ -40,7 +40,6 @@ const Cart = () => {
   const handleOpenAddressModal = () => setopen(true);
   const handleClose = () => setopen(false);
   const handleSubmit = (values) => console.log(values);
-  console.log("Cart items is " + cart.cartItems[0]?.id);
   return (
     <>
       <main className="lg:flex justify-between">
@@ -54,7 +53,7 @@ const Cart = () => {
             <div className="space-y-3">
               <div className="flex justify-between text-gray-400">
                 <p>Item Total</p>
-                <p>₹400</p>
+                <p>₹{cart?.cart?.total}</p>
               </div>
               <div className="flex justify-between text-gray-400">
                 <p>Deliver Fee</p>

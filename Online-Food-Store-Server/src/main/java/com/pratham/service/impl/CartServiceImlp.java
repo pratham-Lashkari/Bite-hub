@@ -68,22 +68,26 @@ public class CartServiceImlp implements CartService {
     if (cartItemOptional.isEmpty()) {
       throw new Exception("Cart item not found");
     }
+
     CartItem item = cartItemOptional.get();
+    Long oldTotalPrice = item.getTotalPrice();
+
     item.setQuantity(quantity);
     Food food = foodService.findFoodById(item.getFoodId());
-    item.setTotalPrice(food.getPrice() * quantity);
+    Long newTotalPrice = (food.getPrice() * quantity);
+    item.setTotalPrice(newTotalPrice);
     cartItemRepository.save(item);
 
     Cart cart = findCartById(item.getCartId());
-    for (CartItem items : cart.getCartItems()) {
-      if (items.getCartId().equals(cart.getId())) {
-        items.setQuantity(quantity);
-        items.setTotalPrice(food.getPrice() * quantity);
-      }
-      Long price = cart.getTotal();
-      cart.setTotal((price + items.getTotalPrice()));
-    }
+    long cartTotal = cart.getTotal();
+
+    // Update the total price of the cart
+    cartTotal -= oldTotalPrice; // Subtract the old total price
+    cartTotal += newTotalPrice; // Add the new total price
+
+    cart.setTotal(cartTotal);
     cartRepository.save(cart);
+
     return item;
   }
 
