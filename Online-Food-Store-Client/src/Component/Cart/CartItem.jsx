@@ -2,8 +2,11 @@ import { Chip, IconButton } from "@mui/material";
 import React from "react";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { useSelector } from "react-redux";
 
 const CartItem = ({ item }) => {
+  const auth = useSelector((store) => store.auth);
+  const cart = useSelector((store) => store.cart);
   return (
     <div className="px-5">
       <div className="lg:flex items-center lg:space-x-5">
