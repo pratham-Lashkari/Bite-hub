@@ -1,16 +1,13 @@
-import { Chip, IconButton } from "@mui/material";
-import React, { useEffect } from "react";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { Chip, IconButton } from "@mui/material";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeCartItem, updateCartItem } from "../../store/Cart/Action";
-import { getRestaurantById } from "../../store/Restaurant/Action";
 
 const CartItem = ({ item }) => {
-  const cart = useSelector((store) => store.cart);
   const menu = useSelector((store) => store.menu);
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");

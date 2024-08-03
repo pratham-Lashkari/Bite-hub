@@ -149,6 +149,7 @@ public class CartServiceImlp implements CartService {
       cartItemResponse.setQuantity(cartItem.getQuantity());
       cartItemResponse.setTotalPrice(cartItem.getTotalPrice());
       cartItemResponses.add(cartItemResponse);
+      cartItemResponse.setRestaurantId(food.getRestaurantId());
     }
     cartResponse.setCartItems(cartItemResponses);
     return cartResponse;

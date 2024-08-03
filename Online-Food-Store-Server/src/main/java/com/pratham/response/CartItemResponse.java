@@ -14,5 +14,6 @@ public class CartItemResponse {
   private String name;
   private List<String> images;
   private int quantity;
+  private String restaurantId;
   private Long totalPrice;
 }

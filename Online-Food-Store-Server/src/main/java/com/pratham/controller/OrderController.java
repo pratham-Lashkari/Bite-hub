@@ -31,7 +31,6 @@ public class OrderController {
   @PostMapping("/order")
   public ResponseEntity<Order> createOrder(@RequestBody OrderRequest req, @RequestHeader("Authorization") String jwt)
       throws Exception {
-    System.out.println("Hiiting points" + req);
     User user = userService.findUserByJwtToken(jwt);
     Order order = orderService.createOrder(req, user);
     return new ResponseEntity<>(order, HttpStatus.CREATED);

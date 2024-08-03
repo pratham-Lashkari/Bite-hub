@@ -28,6 +28,7 @@ export const style = {
 
 const Cart = () => {
   const [open, setopen] = useState(false);
+  const restaurant = useSelector((store) => store.restaurant);
   const cart = useSelector((store) => store.cart);
   const auth = useSelector((store) => store.auth);
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Cart = () => {
     const reqdata = {
       token: localStorage.getItem("token"),
       order: {
-        restaurantId: cart?.cart?.cartItems?.[0]?.foodId,
+        restaurantId: cart?.cart?.cartItems?.[0]?.restaurantId,
         address: {
           fullName: auth.user?.fullName,
           streetAddress: values.streetAddress,
@@ -57,7 +58,6 @@ const Cart = () => {
       },
     };
     dispatch(createOrder(reqdata));
-    console.log("REstaruant id is  = " + reqdata.order.restaurantId);
   };
   return (
     <>
