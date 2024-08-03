@@ -7,9 +7,11 @@ import {
   GET_USER_ORDER_FAILURE,
 } from './ActionTypes';
 import { API_URL } from "../../constants/api";
+import axios from 'axios';
 
 export const createOrder =(reqData)=>{
   return async (dispatch)=>{
+    console.log("Order is before " + reqData.order.restaurantId)
     dispatch({type : CREATE_ORDER_REQUEST});
     try {
       const {data} = await axios.post(`${API_URL}/api/order`,reqData.order, {
@@ -18,9 +20,11 @@ export const createOrder =(reqData)=>{
           Authorization: `Bearer ${reqData.token}`,
         },
       });
+      console.log("Order is after" + data)
       dispatch({ type: CREATE_ORDER_SUCCESS , payload : data });
     } catch (error) {
-      dispatch({ type: CREATE_ORDER_FAILURE , payload : data });
+      console.log("Error is " + error)
+      dispatch({ type: CREATE_ORDER_FAILURE , payload : error });
     }
   }
 }

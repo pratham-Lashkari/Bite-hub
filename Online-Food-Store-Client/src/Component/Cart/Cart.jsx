@@ -42,11 +42,11 @@ const Cart = () => {
   const handleOpenAddressModal = () => setopen(true);
   const handleClose = () => setopen(false);
   const handleSubmit = (values) => {
-    const data = {
-      jwt: localStorage.getItem("token"),
+    const reqdata = {
+      token: localStorage.getItem("token"),
       order: {
-        restaurantId: cart.cartItems[0].food?.restaurantId.id,
-        delivery: {
+        restaurantId: cart?.cart?.cartItems?.[0]?.foodId,
+        address: {
           fullName: auth.user?.fullName,
           streetAddress: values.streetAddress,
           city: values.city,
@@ -56,8 +56,8 @@ const Cart = () => {
         },
       },
     };
-    // dispatch(createOrder(data));
-    console.log("Values are = " + values);
+    dispatch(createOrder(reqdata));
+    console.log("REstaruant id is  = " + reqdata.order.restaurantId);
   };
   return (
     <>
