@@ -12,8 +12,8 @@ import CartItem from "./CartItem";
 import AddressCard from "./AddressCard";
 import AddLocationIcon from "@mui/icons-material/AddLocation";
 import { ErrorMessage, Field, Formik, Form } from "formik";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../../store/Order/Action";
 export const style = {
   position: "absolute",
   top: "50%",
@@ -29,6 +29,8 @@ export const style = {
 const Cart = () => {
   const [open, setopen] = useState(false);
   const cart = useSelector((store) => store.cart);
+  const auth = useSelector((store) => store.auth);
+  const dispatch = useDispatch();
   const initialValues = {
     streetAddress: "",
     state: "",
@@ -39,7 +41,24 @@ const Cart = () => {
   const handleSelectAddress = () => {};
   const handleOpenAddressModal = () => setopen(true);
   const handleClose = () => setopen(false);
-  const handleSubmit = (values) => console.log(values);
+  const handleSubmit = (values) => {
+    const data = {
+      jwt: localStorage.getItem("token"),
+      order: {
+        restaurantId: cart.cartItems[0].food?.restaurantId.id,
+        delivery: {
+          fullName: auth.user?.fullName,
+          streetAddress: values.streetAddress,
+          city: values.city,
+          state: values.state,
+          postalCode: values.pincode,
+          country: "India",
+        },
+      },
+    };
+    // dispatch(createOrder(data));
+    console.log("Values are = " + values);
+  };
   return (
     <>
       <main className="lg:flex justify-between">

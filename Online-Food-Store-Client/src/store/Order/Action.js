@@ -15,7 +15,7 @@ export const createOrder =(reqData)=>{
       const {data} = await axios.post(`${API_URL}/api/order`,reqData.order, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${reqData.token}`,
         },
       });
       dispatch({ type: CREATE_ORDER_SUCCESS , payload : data });

@@ -10,5 +10,4 @@ public class OnlineFoodStoreServerApplication {
 		SpringApplication.run(OnlineFoodStoreServerApplication.class, args);
 		System.out.println("Server started");
 	}
-
 }
