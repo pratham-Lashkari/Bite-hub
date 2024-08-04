@@ -4,12 +4,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-import NavBar from "./Component/NavBar";
-import Profile from "./Component/Profile/Profile";
-import CustomRoutes from "./Component/Routes/CustomRoutes";
+import Routers from "./Component/Routes/Routers";
 import { getUser } from "./store/Authentication/Action";
-import { darkTheme } from "./Theme/DarkTheme";
 import { findCart } from "./store/Cart/Action";
+import { darkTheme } from "./Theme/DarkTheme";
+import Profile from "./Component/Profile/Profile";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,8 +22,7 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <NavBar />
-      <CustomRoutes />
+      <Routers />
       <Profile />
     </ThemeProvider>
   );

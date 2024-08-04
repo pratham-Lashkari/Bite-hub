@@ -9,7 +9,7 @@ import Auth from "../Auth/Auth";
 const CustomRoutes = () => {
   return (
     <div>
-      {/* <NavBar /> */}
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/account/:register" element={<Home />} />
