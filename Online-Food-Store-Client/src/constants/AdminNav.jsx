@@ -7,7 +7,7 @@ import EventIcon from "@mui/icons-material/Event";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-const adminNav = [
+export const adminNav = [
   { title: "Dashboard", icon: <DashboardIcon />, path: "/" },
   { title: "Orders", icon: <ShoppingBagIcon />, path: "/orders" },
   { title: "Menu", icon: <ShopTwoIcon />, path: "/menu" },
