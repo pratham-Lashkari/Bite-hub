@@ -17,3 +17,9 @@ export const adminNav = [
   { title: "Details", icon: <AdminPanelSettingsIcon />, path: "/details" },
   { title: "Logout", icon: <LogoutIcon />, path: "/logout" },
 ];
+
+export const orderStatus = [
+  { label: "Pending", value: "PENDING" },
+  { label: "Completed", value: "COMPLETED" },
+  { label: "All", value: "ALL" },
+];
