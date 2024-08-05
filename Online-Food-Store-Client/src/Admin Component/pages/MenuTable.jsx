@@ -26,7 +26,7 @@ const MenuTable = () => {
               <CreateIcon />
             </IconButton>
           }
-          title={"All Orders"}
+          title={"Menu"}
           sx={{ pt: 2, alignItems: "center" }}
         />
         <TableContainer component={Paper}>
