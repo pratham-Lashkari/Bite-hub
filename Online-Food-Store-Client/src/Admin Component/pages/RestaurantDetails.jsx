@@ -1,5 +1,10 @@
 import React from "react";
 import { Button, Card, CardContent, CardHeader, Grid } from "@mui/material";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 const RestaurantDetails = () => {
   const handleRestaurantStatus = () => {};
   return (
@@ -117,51 +122,40 @@ const RestaurantDetails = () => {
         <Grid item xs={12} lg={6}>
           <Card>
             <CardHeader
-              title={<span className="text-gray-300">Restaurant</span>}
+              title={<span className="text-gray-300">Contact</span>}
             />
             <CardContent>
               <div className="space-y-4 text-gray-200">
                 <div className="flex">
-                  <p className="w-48">Owner</p>
+                  <p className="w-48">Email</p>
                   <p className="text-gray-400">
                     <span className="pr-5"> - </span>
-                    Yash
+                    prata@gamil.com
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Restaurant Name</p>
+                  <p className="w-48">Mobile</p>
                   <p className="text-gray-400">
                     <span className="pr-5"> - </span>
-                    Indian fast food
+                    54895987987
                   </p>
                 </div>
                 <div className="flex">
-                  <p className="w-48">Cusine Type</p>
+                  <p className="w-48">Social links</p>
                   <p className="text-gray-400">
                     <span className="pr-5"> - </span>
-                    Indian fast food
-                  </p>
-                </div>
-                <div className="flex">
-                  <p className="w-48">Opening Hours</p>
-                  <p className="text-gray-400">
-                    <span className="pr-5"> - </span>
-                    Indian fast food
-                  </p>
-                </div>
-                <div className="flex">
-                  <p className="w-48">Status</p>
-                  <p className="text-gray-400">
-                    <span className="pr-5"> - </span>
-                    {true ? (
-                      <span className="px-5 py-2 rounded-full bg-green-400 text-gray-950">
-                        Open
-                      </span>
-                    ) : (
-                      <span className="px-5 py-2 rounded-full bg-red-400 text-gray-950">
-                        Closed
-                      </span>
-                    )}
+                    <a href="/">
+                      <InstagramIcon />
+                    </a>
+                    <a className="px-2" href="/">
+                      <FacebookIcon />
+                    </a>
+                    <a href="/">
+                      <LinkedInIcon />
+                    </a>
+                    <a className="px-2" href="/">
+                      <TwitterIcon />
+                    </a>
                   </p>
                 </div>
               </div>
