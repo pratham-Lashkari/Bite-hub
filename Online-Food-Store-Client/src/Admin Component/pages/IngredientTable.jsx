@@ -16,7 +16,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const orders = [1, 2, 3, 4, 5];
-const IngredientCategoryTable = () => {
+const IngredientTable = () => {
   return (
     <Box>
       <Card>
@@ -26,16 +26,19 @@ const IngredientCategoryTable = () => {
               <CreateIcon />
             </IconButton>
           }
-          title={"Ingredient Category"}
+          title={"Ingredients"}
           sx={{ pt: 2, alignItems: "center" }}
         />
         <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+          <Table sx={{ minWidth: 800 }} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Id</TableCell>
                 <TableCell>name</TableCell>
                 <TableCell>price</TableCell>
+                <TableCell>category</TableCell>
+                <TableCell>Avaiblity</TableCell>
+                <TableCell>Delete</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -45,6 +48,8 @@ const IngredientCategoryTable = () => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell>{row}</TableCell>
+                  <TableCell>{"Pratahm"}</TableCell>
+                  <TableCell>{"Pratahm"}</TableCell>
                   <TableCell>{"Pratahm"}</TableCell>
                   <TableCell>{"Pratahm"}</TableCell>
                 </TableRow>
@@ -57,4 +62,4 @@ const IngredientCategoryTable = () => {
   );
 };
 
-export default IngredientCategoryTable;
+export default IngredientTable;
