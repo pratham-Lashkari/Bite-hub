@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CloseIcon from "@mui/icons-material/Close";
+import { uploadImagesToCloudinary } from "./UplaodToCloudnary";
 
 const initialValues = {
   name: "",
@@ -37,17 +38,19 @@ const CreateRestaurant = () => {
 
   const [uploadImage, setUploadImage] = useState(false);
 
-  const handleImageChange = (event) => {
+  const handleImageChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       setUploadImage(true);
-      // Add image upload logic here
-      // Simulate a delay for image upload
-      setTimeout(() => {
-        const newImage = URL.createObjectURL(file);
-        formik.setFieldValue("images", [...formik.values.images, newImage]);
+      try {
+        const imageUrl = await uploadImagesToCloudinary(file);
+        console.log(imageUrl);
+        formik.setFieldValue("images", [...formik.values.images, imageUrl]);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+      } finally {
         setUploadImage(false);
-      }, 1000);
+      }
     }
   };
 
