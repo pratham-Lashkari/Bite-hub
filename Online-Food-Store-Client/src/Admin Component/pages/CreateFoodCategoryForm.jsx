@@ -37,7 +37,6 @@ const CreateFoodCategoryForm = () => {
             value={formData.categoryName}
           />
           <Button variant="contained" type="submit">
-            {" "}
             Crate Category
           </Button>
         </form>

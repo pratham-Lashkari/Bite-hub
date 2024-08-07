@@ -3,6 +3,7 @@ import {
   Card,
   CardHeader,
   IconButton,
+  Modal,
   Paper,
   Table,
   TableBody,
@@ -14,9 +15,14 @@ import {
 import React from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { style } from "./FoodCategory";
+import CreateFoodCategoryForm from "./CreateFoodCategoryForm";
 
 const orders = [1, 2, 3, 4, 5];
 const IngredientCategoryTable = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box>
       <Card>
@@ -53,6 +59,16 @@ const IngredientCategoryTable = () => {
           </Table>
         </TableContainer>
       </Card>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <CreateFoodCategoryForm />
+        </Box>
+      </Modal>
     </Box>
   );
 };
