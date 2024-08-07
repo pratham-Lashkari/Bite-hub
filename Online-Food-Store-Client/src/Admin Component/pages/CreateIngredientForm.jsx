@@ -43,7 +43,7 @@ const CreateIngredientForm = () => {
     <div className="">
       <div className="p-5">
         <h1 className="text-gray-400 text-center text-xl pb-10">
-          Create Category
+          Create Ingredeint
         </h1>
         <form className="space-y-5" onSubmit={handleSubmit}>
           <TextField

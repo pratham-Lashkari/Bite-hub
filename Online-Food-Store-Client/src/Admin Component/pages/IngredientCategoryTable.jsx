@@ -1,3 +1,4 @@
+import CreateIcon from "@mui/icons-material/Create";
 import {
   Box,
   Card,
@@ -13,10 +14,9 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import CreateIcon from "@mui/icons-material/Create";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { style } from "./FoodCategory";
 import CreateFoodCategoryForm from "./CreateFoodCategoryForm";
+import { style } from "./FoodCategory";
+import IngredeintCategoryCreate from "./IngredeintCategoryCreate";
 
 const orders = [1, 2, 3, 4, 5];
 const IngredientCategoryTable = () => {
@@ -28,7 +28,7 @@ const IngredientCategoryTable = () => {
       <Card>
         <CardHeader
           action={
-            <IconButton>
+            <IconButton onClick={handleOpen}>
               <CreateIcon />
             </IconButton>
           }
@@ -66,7 +66,7 @@ const IngredientCategoryTable = () => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <CreateFoodCategoryForm />
+          <IngredeintCategoryCreate />
         </Box>
       </Modal>
     </Box>
