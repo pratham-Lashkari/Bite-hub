@@ -28,7 +28,7 @@ export const style = {
   p: 4,
 };
 const orders = [1, 2, 3, 4, 5];
-const FoodCategory = () => {
+const IngredeintCategoryCreate = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -81,4 +81,4 @@ const FoodCategory = () => {
   );
 };
 
-export default FoodCategory;
+export default IngredeintCategoryCreate;

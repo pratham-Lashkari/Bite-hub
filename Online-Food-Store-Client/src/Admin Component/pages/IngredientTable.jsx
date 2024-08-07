@@ -1,9 +1,12 @@
+import CreateIcon from "@mui/icons-material/Create";
 import {
   Box,
   Card,
   CardHeader,
   IconButton,
+  Modal,
   Paper,
+  styled,
   Table,
   TableBody,
   TableCell,
@@ -12,17 +15,20 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
-import CreateIcon from "@mui/icons-material/Create";
-import DeleteIcon from "@mui/icons-material/Delete";
+import CreateIngredientForm from "./CreateIngredientForm";
+import { style } from "./FoodCategory";
 
 const orders = [1, 2, 3, 4, 5];
 const IngredientTable = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <Box>
       <Card>
         <CardHeader
           action={
-            <IconButton>
+            <IconButton onClick={handleOpen}>
               <CreateIcon />
             </IconButton>
           }
@@ -58,6 +64,16 @@ const IngredientTable = () => {
           </Table>
         </TableContainer>
       </Card>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <CreateIngredientForm />
+        </Box>
+      </Modal>
     </Box>
   );
 };

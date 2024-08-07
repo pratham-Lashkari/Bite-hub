@@ -5,6 +5,7 @@ import {
   InputLabel,
   MenuItem,
   OutlinedInput,
+  Select,
   TextField,
 } from "@mui/material";
 
@@ -60,7 +61,7 @@ const CreateIngredientForm = () => {
               labelId="veg-label"
               id="vegetarian"
               name="vegetarian"
-              value={formData.categoryName}
+              value={formData.ingredientCategoryId}
               onChange={handleInputChange}
               input={<OutlinedInput label="Vegetarian" />}
               MenuProps={MenuProps}
