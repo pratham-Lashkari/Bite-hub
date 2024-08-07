@@ -2,10 +2,16 @@ import React, { useState } from "react";
 import { useFormik } from "formik";
 import {
   CircularProgress,
-  Grid,
   IconButton,
   TextField,
   Button,
+  FormControl,
+  InputLabel,
+  Select,
+  OutlinedInput,
+  Box,
+  MenuItem,
+  Grid,
 } from "@mui/material";
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CloseIcon from "@mui/icons-material/Close";
@@ -160,16 +166,37 @@ const CreateMenu = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                fullWidth
-                id="ingredients"
-                name="ingredients"
-                label="Ingredients (comma separated)"
-                variant="outlined"
-                onChange={formik.handleChange}
-                value={formik.values.ingredients.join(", ")}
-                helperText="Enter ingredients separated by commas."
-              />
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+                <Select
+                  labelId="demo-multiple-chip-label"
+                  id="demo-multiple-chip"
+                  multiple
+                  value={formik.values.ingredients}
+                  onChange={formik.handleChange}
+                  input={
+                    <OutlinedInput id="select-multiple-chip" label="Chip" />
+                  }
+                  renderValue={(selected) => (
+                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {names.map((name) => (
+                    <MenuItem
+                      key={name}
+                      value={name}
+                      style={getStyles(name, personName, theme)}
+                    >
+                      {name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
             </Grid>
             <Grid item xs={12}>
               <Button
