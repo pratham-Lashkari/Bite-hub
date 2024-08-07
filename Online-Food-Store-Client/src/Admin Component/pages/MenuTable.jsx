@@ -14,15 +14,17 @@ import {
 import React from "react";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useNavigate } from "react-router-dom";
 
 const orders = [1, 2, 3, 4, 5];
 const MenuTable = () => {
+  const navigate = useNavigate();
   return (
     <Box>
       <Card>
         <CardHeader
           action={
-            <IconButton>
+            <IconButton onClick={() => navigate("/admin/restaurant/add-menu")}>
               <CreateIcon />
             </IconButton>
           }

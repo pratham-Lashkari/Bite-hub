@@ -8,6 +8,7 @@ import FoodCategory from "./pages/FoodCategory";
 import Ingredients from "./pages/Ingredients";
 import Events from "./pages/Events";
 import RestaurantDetails from "./pages/RestaurantDetails";
+import CreateMenu from "./CreateMenu";
 
 const Admin = () => {
   return (
@@ -25,6 +26,7 @@ const Admin = () => {
             <Route path="/ingredients" element={<Ingredients />} />
             <Route path="/events" element={<Events />} />
             <Route path="/details" element={<RestaurantDetails />} />
+            <Route path="/add-menu" element={<CreateMenu />} />
           </Routes>
         </div>
       </div>
