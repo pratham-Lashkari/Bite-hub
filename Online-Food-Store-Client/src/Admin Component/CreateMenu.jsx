@@ -72,7 +72,6 @@ const CreateMenu = () => {
       setUploadImage(true);
       try {
         const imageUrl = await uploadImagesToCloudinary(file);
-        console.log(imageUrl);
         formik.setFieldValue("images", [...formik.values.images, imageUrl]);
       } catch (error) {
         console.error("Error uploading image:", error);
